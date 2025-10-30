@@ -50,7 +50,7 @@ $usefulDates = UsefulDates::setDate(\Carbon\Carbon::now());
 
 ## Add a Useful Date
 
-1. Create a new class that extends [`\UsefulDates\Abstracts\UsefulDateAbstract`](https://github.com/geoffreyrose/useful-dates/src/UsefulDates/Abstracts/UsefulDateAbstract.php) 
+1. Create a new class that extends [`\UsefulDates\Abstracts\UsefulDateAbstract`](https://github.com/geoffreyrose/useful-dates/blob/main/src/UsefulDates/Abstracts/UsefulDateAbstract.php) 
 
 An example for April Fools' Day:
 ```php
