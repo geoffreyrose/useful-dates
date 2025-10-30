@@ -1,0 +1,34 @@
+{
+    "name": "geoffreyrose/useful-dates",
+    "description": "Useful Dates -  PHP + Laravel Facade",
+    "keywords": ["PHP", "Laravel", "Useful Dates", "CARBON"],
+    "license": "MIT",
+    "require": {
+        "php": "^8.4",
+        "nesbot/carbon": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "UsefulDates\\": "src/UsefulDates"
+        }
+    },
+    "authors": [
+        {
+            "name": "geoffreyrose",
+            "email": "geoffrey@geoffreyrose.io"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "UsefulDates\\ServiceProvider"
+            ],
+            "aliases": {
+                "UsefulDates": "UsefulDates\\Facades\\UsefulDates"
+            }
+        }
+    },
+    "require-dev": {
+        "laravel/pint": "^1.20"
+    }
+}
