@@ -2,7 +2,7 @@
 
 namespace UsefulDates\Exceptions;
 
-class InvalidUsefulDateException extends \Exception
+class InvalidUsefulDateException extends \RuntimeException
 {
     public function __construct()
     {

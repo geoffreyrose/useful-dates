@@ -10,6 +10,7 @@ use UsefulDates\Exceptions\InvalidDateException;
 use UsefulDates\Exceptions\InvalidUsefulDateException;
 use UsefulDates\Traits\BusinessDays;
 use UsefulDates\Traits\Dates;
+use UsefulDates\Traits\Extensions;
 use UsefulDates\Traits\Info;
 use UsefulDates\Traits\Intervals;
 
@@ -17,13 +18,21 @@ class UsefulDates
 {
     use BusinessDays;
     use Dates;
+    use Extensions;
     use Info;
     use Intervals;
 
     private array $usefulDates = [];
 
+    private array $customMethods = [];
+
     public Carbon $date {
         get => $this->date;
+    }
+
+    public function __construct()
+    {
+        // $this->setDate($date);
     }
 
     /**
@@ -55,6 +64,7 @@ class UsefulDates
             throw new InvalidUsefulDateException;
         }
 
+        $date = new $date;
         $date->setCurrentDate($this->date);
         $this->usefulDates[] = $date;
 

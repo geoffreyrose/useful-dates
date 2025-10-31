@@ -2,7 +2,7 @@
 
 namespace UsefulDates\Exceptions;
 
-class InvalidDayException extends \Exception
+class InvalidDayException extends \RuntimeException
 {
     public function __construct($day)
     {
