@@ -14,7 +14,7 @@ This is an evolution of my other package [US Holidays](https://geoffreyrose.gith
 
 You can add your own dates that can have as simple or complex logic as you want.
 
-With useful days you can also create extensions (not implemented yet) that contain your country-specific holidays, family and friends birthdays, or anything else you want.
+With useful days you can also create extensions that contain your country-specific holidays, family and friends birthdays, or anything else you want.
 
 On its own UsefulDates comes with no dates.  It is a clean base that you can extend with your own dates and methods to calculate dates on demand to show on a page or to save in a database.
 
