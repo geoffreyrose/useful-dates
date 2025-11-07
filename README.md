@@ -10,7 +10,7 @@
 
 A simple and elegant PHP library for working with commonly used or desired dates in your applications. UsefulDates helps you quickly identify and retrieve important dates like holidays, birthdays, paydays, and other significant calendar events.
 
-This is an evolution of my other package [US Holidays](https://geoffreyrose.github.io/us-holidays/).
+This is an evolution of my other package [US Holidays](https://github.com/geoffreyrose/us-holidays).
 
 You can add your own dates that can have as simple or complex logic as you want.
 
