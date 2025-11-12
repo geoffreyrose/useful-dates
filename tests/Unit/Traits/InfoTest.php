@@ -53,7 +53,7 @@ it('returns multiple useful dates when more than one matches the day', function 
     $dates = $this->usefulDate->getUsefulDate();
 
     expect(count($dates))->toEqual(2)
-        ->and(array_map(fn ($d) => $d->usefulDate()->toDateString(), $dates))
+        ->and(array_map(fn ($d) => $d->usefulDate(), $dates))
         ->toEqual([Carbon::create('2025-04-01'), Carbon::create('2025-04-01')])
         ->and([$dates[0]->name, $dates[1]->name])
         ->toEqual(["April Fools' Day", 'Also Apr 1']);
