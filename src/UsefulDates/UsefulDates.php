@@ -70,19 +70,4 @@ class UsefulDates
 
         return $this;
     }
-
-    public function usefulDates($year = null): array
-    {
-        if (!$year) {
-            $year = $this->date->year;
-        }
-
-        $usefulDates = [];
-        foreach ($this->usefulDates as $usefulDate) {
-            $usefulDate->setCurrentDate($this->date->copy()->year($year)->startOfYear());
-            $usefulDates[] = $usefulDate;
-        }
-
-        return array_values($usefulDates);
-    }
 }

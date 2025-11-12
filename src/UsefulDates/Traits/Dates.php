@@ -2,6 +2,8 @@
 
 namespace UsefulDates\Traits;
 
+use Carbon\Carbon;
+
 trait Dates
 {
     /**
@@ -15,6 +17,8 @@ trait Dates
             $year = $this->date->year;
         }
 
-        return $this->usefulDates($year);
+        $startOfYear = Carbon::create($year, 1, 1);
+
+        return $this->getUsefulDatesInDays($startOfYear->daysInYear(), $startOfYear);
     }
 }

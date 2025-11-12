@@ -2,6 +2,8 @@
 
 namespace UsefulDates\Traits;
 
+use Carbon\Carbon;
+
 trait Intervals
 {
     /**
@@ -9,10 +11,10 @@ trait Intervals
      *
      * @param  int  $days  The number of days to look ahead to find Useful Dates in
      */
-    public function getUsefulDatesInDays(int $days): array
+    public function getUsefulDatesInDays(int $days, ?Carbon $startDate = null): array
     {
         $usefulDates = [];
-        $currentDate = $this->date->copy();
+        $currentDate = $startDate?->copy() ?: $this->date->copy();
         for ($i = 0; $i <= $days; $i++) {
             foreach ($this->getUsefulDate($currentDate) as $usefulDate) {
                 $usefulDates[] = $usefulDate;
