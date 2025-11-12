@@ -197,5 +197,16 @@ if($dates->isDecember()) echo "It's December!";
 ### Linting
 
 ```
- ./vendor/bin/pint   
+./vendor/bin/pint   
+```
+
+### Testing
+
+```
+./vendor/bin/pest 
+ 
+./vendor/bin/pest --coverage
+ 
+herd coverage ./vendor/bin/pest --coverage
+
 ```

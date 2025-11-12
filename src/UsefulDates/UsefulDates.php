@@ -32,7 +32,7 @@ class UsefulDates
 
     public function __construct()
     {
-        // $this->setDate($date);
+        //
     }
 
     /**
