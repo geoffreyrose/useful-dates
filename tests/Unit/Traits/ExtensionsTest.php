@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use Tests\ValidAprilFools;
 use UsefulDates\Abstracts\UsefulDatesExtensionAbstract;
 use UsefulDates\UsefulDates;
 
@@ -72,3 +73,23 @@ it('throws BadMethodCallException when calling unknown dynamic method', function
     // No method registered
     $this->usefulDate->superSpecialMethod();
 })->throws(BadMethodCallException::class);
+
+it('add date in extension', function (): void {
+    class MyExtension extends UsefulDatesExtensionAbstract
+    {
+        public static function usefulDates(): array
+        {
+            return [
+                ValidAprilFools::class
+            ];
+        }
+    }
+
+    $this->usefulDate->addExtension(MyExtension::class);
+    $dates = $this->usefulDate->getNextUsefulDates();
+
+    expect(count($dates))->toEqual(1)
+        ->and($dates[0]->usefulDate())->toEqual(Carbon::create('2025-04-01'))
+        ->and($dates[0]->name)->toEqual('April Fools\' Day');
+
+});
