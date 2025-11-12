@@ -170,7 +170,7 @@ Extension would be useful when you want to add dates and methods that someone el
 
 namespace App;
 
-use App\UsHolidays\UsHolidaysExtension
+use App\UsHolidays\UsHolidaysExtension;
 use Carbon\Carbon;
 
 /**
