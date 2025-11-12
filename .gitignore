@@ -3,7 +3,7 @@ composer.lock
 vendor
 App/Index.php
 .phpunit.result.cache
-reports
+coverage
 clover.xml
 coverage.xml
 assets

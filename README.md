@@ -205,8 +205,7 @@ if($dates->isDecember()) echo "It's December!";
 ```
 ./vendor/bin/pest 
  
-./vendor/bin/pest --coverage
+./vendor/bin/pest --coverage-html coverage
  
-herd coverage ./vendor/bin/pest --coverage
-
+herd coverage ./vendor/bin/pest --coverage-html coverage
 ```
