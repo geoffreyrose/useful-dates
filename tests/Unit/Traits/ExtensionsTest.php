@@ -80,7 +80,7 @@ it('add date in extension', function (): void {
         public static function usefulDates(): array
         {
             return [
-                ValidAprilFools::class
+                ValidAprilFools::class,
             ];
         }
     }
