@@ -60,7 +60,7 @@ class UsefulDates
      */
     public function add($date): self
     {
-        if (get_parent_class($date) !== UsefulDateAbstract::class) {
+        if ($this->getTopParentClass($date::class) !== UsefulDateAbstract::class) {
             throw new InvalidUsefulDateException;
         }
 
@@ -69,5 +69,18 @@ class UsefulDates
         $this->usefulDates[] = $date;
 
         return $this;
+    }
+
+    private function getTopParentClass(string $className): string
+    {
+        $currentClass = $className;
+        $topParent = null;
+
+        while ($parent = get_parent_class($currentClass)) {
+            $topParent = $parent;
+            $currentClass = $parent; // Move up to the parent class name
+        }
+
+        return $topParent;
     }
 }

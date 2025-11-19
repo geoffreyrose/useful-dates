@@ -19,6 +19,6 @@ trait Dates
 
         $startOfYear = Carbon::create($year, 1, 1);
 
-        return $this->getUsefulDatesInDays($startOfYear->daysInYear(), $startOfYear);
+        return $this->getUsefulDatesInDays($startOfYear->daysInYear() - 1, $startOfYear);
     }
 }

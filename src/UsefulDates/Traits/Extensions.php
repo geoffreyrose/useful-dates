@@ -14,12 +14,12 @@ trait Extensions
      */
     public function addExtension($extension): self
     {
-        if (get_parent_class($extension) !== UsefulDatesExtensionAbstract::class) {
+        if ($this->getTopParentClass($extension) !== UsefulDatesExtensionAbstract::class) {
             throw new InvalidExtensionException;
         }
 
         foreach ($extension::usefulDates() as $dateToAdd) {
-            if (get_parent_class($dateToAdd) !== UsefulDateAbstract::class) {
+            if ($this->getTopParentClass($dateToAdd) !== UsefulDateAbstract::class) {
                 throw new InvalidUsefulDateException;
             }
 
