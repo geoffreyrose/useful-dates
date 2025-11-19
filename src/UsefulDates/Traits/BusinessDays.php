@@ -94,4 +94,24 @@ trait BusinessDays
 
         return $day;
     }
+
+    /**
+     * returns Today (if is a business day) or the previous business day
+     *
+     * @return Carbon Carbon Date object
+     */
+    public function todayOrPreviousBusinessDay(): Carbon
+    {
+        return $this->isBusinessDay($this->date) ? $this->date : $this->prevBusinessDay();
+    }
+
+    /**
+     * returns Today (if is a business day) or the next business day
+     *
+     * @return Carbon Carbon Date object
+     */
+    public function todayOrNextBusinessDay(): Carbon
+    {
+        return $this->isBusinessDay($this->date) ? $this->date : $this->nextBusinessDay();
+    }
 }
