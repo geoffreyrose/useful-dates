@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use DateTime;
 use Throwable;
 use UsefulDates\Abstracts\UsefulDateAbstract;
+use UsefulDates\Enums\RepeatFrequency;
 use UsefulDates\Exceptions\InvalidDateException;
 use UsefulDates\Exceptions\InvalidUsefulDateException;
 use UsefulDates\Traits\BusinessDays;
@@ -67,6 +68,30 @@ class UsefulDates
         $date = new $date;
         $date->setCurrentDate($this->date);
         $this->usefulDates[] = $date;
+
+        return $this;
+    }
+
+    public function addDate(string $name, Carbon $date, RepeatFrequency $repeatFrequency = RepeatFrequency::YEARLY, int $startYear = 1): self
+    {
+        $class = new class($name, $date, $repeatFrequency, $startYear) extends \UsefulDates\Abstracts\UsefulDateAbstract
+        {
+            public function __construct($name, $date, $repeatFrequency, $startYear)
+            {
+                $this->name = $name;
+                $this->is_repeated = true;
+                $this->repeat_frequency = $repeatFrequency;
+                $this->start_date = Carbon::create($startYear, $date->month, $date->day, 0, 0, 0);
+            }
+
+            public function date(): Carbon
+            {
+                return Carbon::create($this->currentDate->year, $this->start_date->month, $this->start_date->day, 0, 0, 0);
+            }
+        };
+
+        $class->setCurrentDate($this->date);
+        $this->usefulDates[] = $class;
 
         return $this;
     }

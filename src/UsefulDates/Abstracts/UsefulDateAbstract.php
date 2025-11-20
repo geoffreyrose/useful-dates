@@ -55,6 +55,13 @@ abstract class UsefulDateAbstract implements UsefulDateInterface
     public function usefulDate(): ?Carbon
     {
         $date = $this->date();
+        if ($this->start_date && $date->lt($this->start_date)) {
+            return null;
+        }
+
+        if ($this->end_date && $date->gt($this->end_date)) {
+            return null;
+        }
 
         return match ($this->repeat_frequency) {
             RepeatFrequency::NONE => $date?->isBirthday($this->currentDate) ? $date : null,

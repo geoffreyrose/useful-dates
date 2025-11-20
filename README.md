@@ -89,13 +89,24 @@ $usefulDates = $usefulDates->getNextUsefulDates(5);
 // this will return the next 5 Carbon dates of April Fools' Day since that is the only UsefulDate added.
 ```
 
-Methods on `UsefulDaresAbstract``
+Methods on `UsefulDaresAbstract`
 * daysAway() // a positive or negative integer from the current date set
 
+**Alternatively**: Use the `addDate` to add a date without creating a class.
 
+This will create a new anonymous class for you.
+
+```php
+function addDate(string $name, Carbon $date, RepeatFrequency $repeatFrequency=RepeatFrequency::YEARLY, int $startYear=1): self
+```
+
+```php
+$usefulDates = new UsefulDates\UsefulDates;
+$usefulDates->setDate(\Carbon\Carbon::now());
+$usefulDates->addDate(name: "Patrick Star's Birthday", date: \Carbon\Carbon::create('1999', '8', '17'), startYear: 1999);
+```
 
 ## Extensions
-
 
 ### First Party Extensions
 
