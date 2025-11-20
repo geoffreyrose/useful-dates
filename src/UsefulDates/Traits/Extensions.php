@@ -12,13 +12,13 @@ trait Extensions
     /**
      * @throws InvalidExtensionException|InvalidUsefulDateException
      */
-    public function addExtension($extension): self
+    public function addExtension($extension, $options = null): self
     {
         if ($this->getTopParentClass($extension) !== UsefulDatesExtensionAbstract::class) {
             throw new InvalidExtensionException;
         }
 
-        foreach ($extension::usefulDates() as $dateToAdd) {
+        foreach ($extension::usefulDates($options) as $dateToAdd) {
             if ($this->getTopParentClass($dateToAdd) !== UsefulDateAbstract::class) {
                 throw new InvalidUsefulDateException;
             }
