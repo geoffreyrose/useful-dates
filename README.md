@@ -96,6 +96,11 @@ Methods on `UsefulDaresAbstract``
 
 ## Extensions
 
+
+### First Party Extensions
+
+* US Holidays - [geoffreyrose/useful-dates-us-holidays](https://github.com/geoffreyrose/useful-dates-us-holidayn)
+
 ### Add an Extension
 
 Extensions can be as simple as a group of UseFulDates. They can also add new methods that UsefulDates can use.
@@ -103,7 +108,7 @@ Extensions can be as simple as a group of UseFulDates. They can also add new met
 ```php
 $usefulDates = new UsefulDates\UsefulDates;
 $usefulDates->setDate(\Carbon\Carbon::now());
-$usefulDates->addExtension(\App\Extensions\UsHolidays:class);
+$this->addExtension(\UsHolidays\UsHolidaysExtension::class);
 ```
 
 ### Create a new Extension
@@ -170,7 +175,7 @@ Extension would be useful when you want to add dates and methods that someone el
 
 namespace App;
 
-use App\UsHolidays\UsHolidaysExtension;
+use UsHolidays\UsHolidaysExtension;
 use Carbon\Carbon;
 
 /**
@@ -191,7 +196,6 @@ class MyUsefulDates extends \UsefulDates\UsefulDates
 ```php
 $dates = new \App\MyUsefulDates;
 $dates->init(\Carbon\Carbon::now()->addMonths(2));
-if($dates->isDecember()) echo "It's December!";
 ```
 
 ### Linting
