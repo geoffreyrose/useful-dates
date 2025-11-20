@@ -99,7 +99,7 @@ Methods on `UsefulDaresAbstract``
 
 ### First Party Extensions
 
-* US Holidays - [geoffreyrose/useful-dates-us-holidays](https://github.com/geoffreyrose/useful-dates-us-holidayn)
+* US Holidays - [geoffreyrose/useful-dates-us-holidays](https://github.com/geoffreyrose/useful-dates-us-holidays)
 
 ### Add an Extension
 
