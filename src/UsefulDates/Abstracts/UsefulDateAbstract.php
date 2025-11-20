@@ -28,12 +28,12 @@ abstract class UsefulDateAbstract implements UsefulDateInterface
         get => $this->repeat_frequency;
     }
 
-    public ?Carbon $start_date {
+    public ?Carbon $start_date = null {
         set => $this->start_date = $value;
         get => $this->start_date;
     }
 
-    public ?Carbon $end_date {
+    public ?Carbon $end_date = null {
         set => $this->end_date = $value;
         get => $this->end_date;
     }
@@ -55,6 +55,10 @@ abstract class UsefulDateAbstract implements UsefulDateInterface
     public function usefulDate(): ?Carbon
     {
         $date = $this->date();
+        if (!$date) {
+            return null;
+        }
+
         if ($this->start_date && $date->lt($this->start_date)) {
             return null;
         }
