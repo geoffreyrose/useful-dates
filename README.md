@@ -66,17 +66,19 @@ class AprilFools extends \UsefulDates\Abstracts\UsefulDateAbstract
     public function __construct()
     {
         $this->name = "April Fools' Day";
-        $this->start_date = Carbon::create(1582, 4, 1, 0, 0, 0);;
+        $this->start_date = Carbon::createFromFormat('Y-m-d', '1582-04-01');
         $this->is_repeated = true;
         $this->repeat_frequency = RepeatFrequency::YEARLY;
     }
 
     public function date(): Carbon
     {
-        return Carbon::create($this->currentDate->year, 4, 1, 0, 0, 0);
+        return Carbon::createFromFormat('Y-m-d', "{$this->currentDate->year}-04-01");
     }
 }
 ```
+
+Note: Carbon::createFromFormat() in my testing is faster than Carbon:create().
 
 2. Use the `add` method to add the new class to the `UsefulDates` instance.
 
@@ -103,7 +105,7 @@ function addDate(string $name, Carbon $date, RepeatFrequency $repeatFrequency=Re
 ```php
 $usefulDates = new UsefulDates\UsefulDates;
 $usefulDates->setDate(\Carbon\Carbon::now());
-$usefulDates->addDate(name: "Patrick Star's Birthday", date: \Carbon\Carbon::create('1999', '8', '17'), startYear: 1999);
+$usefulDates->addDate(name: "Patrick Star's Birthday", date: \Carbon\Carbon::createFromFormat('Y-m-d', '1999-08-17'), startYear: 1999);
 ```
 
 ## Extensions

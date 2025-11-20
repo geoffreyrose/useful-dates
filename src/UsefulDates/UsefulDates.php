@@ -81,12 +81,12 @@ class UsefulDates
                 $this->name = $name;
                 $this->is_repeated = true;
                 $this->repeat_frequency = $repeatFrequency;
-                $this->start_date = Carbon::create($startYear, $date->month, $date->day, 0, 0, 0);
+                $this->start_date = Carbon::createFromFormat('Y-m-d', "{$startYear}-{$date->month}-{$date->day}");
             }
 
             public function date(): Carbon
             {
-                return Carbon::create($this->currentDate->year, $this->start_date->month, $this->start_date->day, 0, 0, 0);
+                return Carbon::createFromFormat('Y-m-d', "{$this->currentDate->year}-{$this->start_date->month}-{$this->start_date->day}");
             }
         };
 
@@ -103,7 +103,7 @@ class UsefulDates
 
         while ($parent = get_parent_class($currentClass)) {
             $topParent = $parent;
-            $currentClass = $parent; // Move up to the parent class name
+            $currentClass = $parent;
         }
 
         return $topParent;

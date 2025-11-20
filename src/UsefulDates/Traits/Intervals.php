@@ -23,7 +23,7 @@ trait Intervals
             $currentDate->addDay();
         }
 
-        return array_values($usefulDates);
+        return $usefulDates;
     }
 
     /**
@@ -52,7 +52,7 @@ trait Intervals
             $currentDate->addDay();
         }
 
-        return array_values($usefulDates);
+        return $usefulDates;
     }
 
     /**
@@ -71,7 +71,7 @@ trait Intervals
             $currentDate->subDay();
         }
 
-        return array_values($usefulDates);
+        return $usefulDates;
     }
 
     /**
@@ -85,7 +85,7 @@ trait Intervals
             $year = $this->date->year;
         }
 
-        $startOfYear = Carbon::create($year, 1, 1);
+        $startOfYear = Carbon::createFromFormat('Y-m-d', "{$year}-01-01");
 
         return $this->getUsefulDatesInDays($startOfYear->daysInYear() - 1, $startOfYear);
     }

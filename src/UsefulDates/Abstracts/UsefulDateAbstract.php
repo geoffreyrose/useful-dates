@@ -59,19 +59,20 @@ abstract class UsefulDateAbstract implements UsefulDateInterface
             return null;
         }
 
-        if ($this->start_date && $date->lt($this->start_date)) {
-            return null;
+        if ($this->repeat_frequency === RepeatFrequency::CUSTOM) {
+            return $date;
         }
 
-        if ($this->end_date && $date->gt($this->end_date)) {
+        $isBirthday = $date->isBirthday($this->currentDate);
+
+        if (!$isBirthday) {
             return null;
         }
 
         return match ($this->repeat_frequency) {
-            RepeatFrequency::NONE => $date?->isBirthday($this->currentDate) ? $date : null,
-            RepeatFrequency::MONTHLY => $this->isWithinMonthlyRange() && $date?->isBirthday($this->currentDate) ? $date : null,
-            RepeatFrequency::YEARLY => $this->isWithinYearlyRange() && $date?->isBirthday($this->currentDate) ? $date : null,
-            RepeatFrequency::CUSTOM => $date,
+            RepeatFrequency::NONE => $date->year === $this->start_date->year ? $date : null,
+            RepeatFrequency::MONTHLY => $this->isWithinMonthlyRange() ? $date : null,
+            RepeatFrequency::YEARLY => $this->isWithinYearlyRange() ? $date : null,
         };
     }
 
@@ -81,9 +82,23 @@ abstract class UsefulDateAbstract implements UsefulDateInterface
             return true;
         }
 
-        return $this->currentDate->year > $this->start_date->year
-            || ($this->currentDate->year === $this->start_date->year
-                && $this->currentDate->month >= $this->start_date->month);
+        $currentYear = $this->currentDate->year;
+        $currentMonth = $this->currentDate->month;
+        $startYear = $this->start_date->year;
+        $startMonth = $this->start_date->month;
+
+        if ($currentYear < $startYear || ($currentYear === $startYear && $currentMonth < $startMonth)) {
+            return false;
+        }
+
+        if (!$this->end_date) {
+            return true;
+        }
+
+        $endYear = $this->end_date->year;
+        $endMonth = $this->end_date->month;
+
+        return $currentYear < $endYear || ($currentYear === $endYear && $currentMonth <= $endMonth);
     }
 
     private function isWithinYearlyRange(): bool
@@ -92,6 +107,12 @@ abstract class UsefulDateAbstract implements UsefulDateInterface
             return true;
         }
 
-        return $this->currentDate->year >= $this->start_date->year;
+        $currentYear = $this->currentDate->year;
+
+        if ($currentYear < $this->start_date->year) {
+            return false;
+        }
+
+        return !$this->end_date || $currentYear <= $this->end_date->year;
     }
 }

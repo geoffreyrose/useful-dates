@@ -36,9 +36,10 @@ trait Info
             $date = $this->date;
         }
         $usefulDates = [];
+        $copy = $date->copy();
 
         foreach ($this->usefulDates as $usefulDate) {
-            $usefulDate->setCurrentDate($date->copy());
+            $usefulDate->setCurrentDate($copy);
             if ($usefulDate->usefulDate()) {
                 $usefulDates[] = clone $usefulDate;
             }
