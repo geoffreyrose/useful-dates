@@ -237,7 +237,7 @@ $federalHolidays = $usefulDate->getUsefulDatesInDays(100, filters: [
 Filter arrays must contain the following properties:
 * property
 * operator
-  * valid operators: >, <, >=, <=, =, !=
+  * valid operators: `>`, `<`, `>=`, `<=`, `=`, `!=`
 * value
 
 ### Linting
