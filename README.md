@@ -99,7 +99,7 @@ Methods on `UsefulDaresAbstract`
 This will create a new anonymous class for you.
 
 ```php
-function addDate(string $name, Carbon $date, RepeatFrequency $repeatFrequency=RepeatFrequency::YEARLY, int $startYear=1): self
+function addDate(string $name, Carbon $date, bool $isRepeated = true, RepeatFrequency $repeatFrequency = RepeatFrequency::YEARLY, int $startYear = 1): self
 ```
 
 ```php
@@ -121,7 +121,7 @@ Extensions can be as simple as a group of UseFulDates. They can also add new met
 ```php
 $usefulDates = new UsefulDates\UsefulDates;
 $usefulDates->setDate(\Carbon\Carbon::now());
-$this->addExtension(\UsefulDatesUsHolidays\UsHolidaysExtension::class);
+$usefulDates->addExtension(\UsefulDatesUsHolidays\UsHolidaysExtension::class);
 ```
 
 ### Create a new Extension
@@ -210,6 +210,35 @@ class MyUsefulDates extends \UsefulDates\UsefulDates
 $dates = new \App\MyUsefulDates;
 $dates->init(\Carbon\Carbon::now()->addMonths(2));
 ```
+
+
+### Filtering
+
+
+```php
+$usefulDates = new UsefulDates\UsefulDates;
+$usefulDates->setDate(\Carbon\Carbon::now());
+$usefulDates->addExtension(\UsefulDatesUsHolidays\UsHolidaysExtension::class);
+
+$federalHolidays = $usefulDate->getUsefulDatesInDays(100, filters: [
+    [
+        'property' =>'is_federal_holiday',
+        'operator' => '=',
+        'value' => true
+    ],
+    [
+        'property' =>'federal_holiday_start_year',
+        'operator' => '<=',
+        'value' => 1900
+    ],
+]);
+```
+
+Filter arrays must contain the following properties:
+* property
+* operator
+  * valid operators: >, <, >=, <=, =, !=
+* value
 
 ### Linting
 

@@ -23,7 +23,7 @@ trait Extensions
                 throw new InvalidUsefulDateException;
             }
 
-            $this->add(new $dateToAdd);
+            $this->add($dateToAdd);
         }
 
         if ($extension::$hasMethods) {
