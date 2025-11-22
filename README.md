@@ -212,7 +212,7 @@ $dates->init(\Carbon\Carbon::now()->addMonths(2));
 ```
 
 
-### Filtering
+## Filtering
 
 
 ```php
