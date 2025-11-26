@@ -10,9 +10,18 @@ use UsefulDates\Exceptions\InvalidUsefulDateException;
 trait Extensions
 {
     /**
-     * @throws InvalidExtensionException|InvalidUsefulDateException
+     * Register an extension and import its provided useful dates and methods.
+     *
+     * The extension class must extend UsefulDatesExtensionAbstract. Any provided
+     * useful dates must extend UsefulDateAbstract.
+     *
+     * @param  class-string  $extension  Fully-qualified extension class name.
+     * @param  mixed|null  $options  Optional configuration passed to the extension when building dates.
+     * @return self Fluent interface.
+     *
+     * @throws InvalidExtensionException|InvalidUsefulDateException When the extension or a provided date is invalid.
      */
-    public function addExtension($extension, $options = null): self
+    public function addExtension(string $extension, mixed $options = null): self
     {
         if ($this->getTopParentClass($extension) !== UsefulDatesExtensionAbstract::class) {
             throw new InvalidExtensionException;
@@ -37,7 +46,17 @@ trait Extensions
     }
 
     /**
-     * Handle dynamic method calls
+     * Handle dynamic method calls registered by extensions.
+     *
+     * If an extension has exposed a method via methods(), the call will be
+     * dispatched to the stored callable. Otherwise a BadMethodCallException
+     * is thrown.
+     *
+     * @param  string  $name  The method name being invoked.
+     * @param  array<int, mixed>  $arguments  Arguments passed to the dynamic method.
+     * @return mixed The result of the callable.
+     *
+     * @throws \BadMethodCallException When no dynamic method exists for $name.
      */
     public function __call(string $name, array $arguments): mixed
     {

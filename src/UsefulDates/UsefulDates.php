@@ -34,7 +34,15 @@ class UsefulDates
     }
 
     /**
-     * @throws InvalidDateException
+     * Set the working date/time context for all useful date calculations.
+     *
+     * The value is normalized to UTC. Accepts Carbon, DateTime, or any string
+     * understood by Carbon::create().
+     *
+     * @param  Carbon|DateTime|string  $date  The date/time to set as context.
+     * @return self Fluent interface.
+     *
+     * @throws InvalidDateException When the provided string cannot be parsed into a date.
      */
     public function setDate(Carbon|DateTime|string $date): self
     {
@@ -59,6 +67,12 @@ class UsefulDates
         return $this;
     }
 
+    /**
+     * Get the top-most parent class name for the given class name.
+     *
+     * @param  string  $className  Fully-qualified class name to inspect.
+     * @return string|null The top-most parent class name, or null if none or on error.
+     */
     private function getTopParentClass(string $className): ?string
     {
         try {

@@ -10,9 +10,18 @@ use UsefulDates\Exceptions\InvalidUsefulDateException;
 trait Dates
 {
     /**
-     * @throws InvalidUsefulDateException
+     * Add a UsefulDate definition by class name.
+     *
+     * The class must extend UsefulDateAbstract. The instance will have its
+     * current date and current useful-date context set to the instance's
+     * current context date.
+     *
+     * @param  class-string  $date  Fully-qualified class name of the UsefulDate to add.
+     * @return self Fluent interface.
+     *
+     * @throws InvalidUsefulDateException When the class does not extend UsefulDateAbstract.
      */
-    public function add($date): self
+    public function add(string $date): self
     {
         if ($this->getTopParentClass($date) !== UsefulDateAbstract::class) {
             throw new InvalidUsefulDateException;
@@ -26,11 +35,32 @@ trait Dates
         return $this;
     }
 
+    /**
+     * Add a simple one-off or repeating date by name and base date.
+     *
+     * This creates an internal UsefulDate implementation that repeats according to the provided options.
+     *
+     * @param  string  $name  Human-friendly name for the date (e.g., "My Birthday").
+     * @param  Carbon  $date  Prototype date whose month/day are used for each occurrence.
+     * @param  bool  $isRepeated  Whether the date repeats beyond its start year (default true).
+     * @param  RepeatFrequency  $repeatFrequency  NONE|MONTHLY|YEARLY|CUSTOM (default YEARLY).
+     * @param  int  $startYear  The first calendar year in which the date is considered (default 1).
+     * @return self Fluent interface.
+     */
     public function addDate(string $name, Carbon $date, bool $isRepeated = true, RepeatFrequency $repeatFrequency = RepeatFrequency::YEARLY, int $startYear = 1): self
     {
         $class = new class($name, $date, $isRepeated, $repeatFrequency, $startYear) extends \UsefulDates\Abstracts\UsefulDateAbstract
         {
-            public function __construct($name, $date, $isRepeated, $repeatFrequency, $startYear)
+            /**
+             * Construct a simple repeating useful-date definition.
+             *
+             * @param  string  $name  Human-friendly name for the date.
+             * @param  Carbon  $date  Prototype date whose month/day are used for each occurrence.
+             * @param  bool  $isRepeated  Whether the date repeats beyond its start year.
+             * @param  RepeatFrequency  $repeatFrequency  NONE|MONTHLY|YEARLY|CUSTOM.
+             * @param  int  $startYear  The first calendar year in which the date is considered.
+             */
+            public function __construct(string $name, Carbon $date, bool $isRepeated, RepeatFrequency $repeatFrequency, int $startYear)
             {
                 $this->name = $name;
                 $this->is_repeated = $isRepeated;
@@ -38,6 +68,11 @@ trait Dates
                 $this->start_date = Carbon::createFromFormat('Y-m-d H:i:s', "{$startYear}-{$date->month}-{$date->day} 00:00:00");
             }
 
+            /**
+             * Get the occurrence date for the current context year using the stored month/day.
+             *
+             * @return Carbon The computed occurrence date at 00:00:00 UTC for the current context year.
+             */
             public function date(): Carbon
             {
                 return Carbon::createFromFormat('Y-m-d H:i:s', "{$this->currentDate->year}-{$this->start_date->month}-{$this->start_date->day} 00:00:00");

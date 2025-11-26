@@ -42,6 +42,12 @@ abstract class UsefulDateAbstract implements UsefulDateInterface
 
     protected Carbon $currentUsefulDate;
 
+    /**
+     * Set the date used to evaluate the definition for a specific occurrence.
+     *
+     * @param  Carbon  $currentDate  The date context for evaluating this useful date.
+     * @return self Fluent interface.
+     */
     public function setCurrentDate(Carbon $currentDate): self
     {
         $this->currentDate = $currentDate;
@@ -49,6 +55,12 @@ abstract class UsefulDateAbstract implements UsefulDateInterface
         return $this;
     }
 
+    /**
+     * Set the date used to compute relative values such as daysAway().
+     *
+     * @param  Carbon  $currentDate  The date context for relative calculations.
+     * @return self Fluent interface.
+     */
     public function setCurrentUsefulDate(Carbon $currentDate): self
     {
         $this->currentUsefulDate = $currentDate;
@@ -56,6 +68,14 @@ abstract class UsefulDateAbstract implements UsefulDateInterface
         return $this;
     }
 
+    /**
+     * Get the number of days between the relative context date and this occurrence.
+     *
+     * Positive values mean the occurrence is in the future; negative values mean
+     * it is in the past. Zero means the occurrence is today.
+     *
+     * @return int Signed number of days until/since the useful date occurrence.
+     */
     public function daysAway(): int
     {
         $ceil = ceil($this->currentUsefulDate->diffInDays($this->usefulDate()));
@@ -68,6 +88,13 @@ abstract class UsefulDateAbstract implements UsefulDateInterface
         }
     }
 
+    /**
+     * Compute the occurrence date for the current context if it is considered useful.
+     *
+     * Applies the repeat frequency rules and optional start/end ranges.
+     *
+     * @return Carbon|null The occurrence date matching the current context, or null if not useful.
+     */
     public function usefulDate(): ?Carbon
     {
         $date = $this->date();
@@ -91,6 +118,13 @@ abstract class UsefulDateAbstract implements UsefulDateInterface
         };
     }
 
+    /**
+     * Determine if the current context month is within the configured monthly range.
+     *
+     * Applies start_date and end_date month/year bounds where provided.
+     *
+     * @return bool True if the current month lies within [start, end]; false otherwise.
+     */
     private function isWithinMonthlyRange(): bool
     {
         if (!$this->start_date) {
@@ -116,6 +150,13 @@ abstract class UsefulDateAbstract implements UsefulDateInterface
         return $currentYear < $endYear || ($currentYear === $endYear && $currentMonth <= $endMonth);
     }
 
+    /**
+     * Determine if the current context year is within the configured yearly range.
+     *
+     * Applies start_date and end_date year bounds where provided.
+     *
+     * @return bool True if the current year lies within [start, end]; false otherwise.
+     */
     private function isWithinYearlyRange(): bool
     {
         if (!$this->start_date) {
