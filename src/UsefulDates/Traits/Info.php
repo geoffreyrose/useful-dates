@@ -14,17 +14,15 @@ trait Info
         if (!$date) {
             $date = $this->date;
         }
-        $isUsefulDate = false;
 
         foreach ($this->usefulDates as $usefulDate) {
             $usefulDate->setCurrentDate($date);
-            if ($date->isBirthday($usefulDate->usefulDate())) {
-                $isUsefulDate = true;
-                break;
+            if ($usefulDate->usefulDate()) {
+                return true;
             }
         }
 
-        return $isUsefulDate;
+        return false;
     }
 
     /**
@@ -38,8 +36,10 @@ trait Info
         $usefulDates = [];
         $copy = $date->copy();
 
-        foreach ($this->usefulDates as $usefulDate) {
-            if (is_array($filters)) {
+        $filteredDates = [];
+
+        if (is_array($filters)) {
+            foreach ($this->usefulDates as $usefulDate) {
                 foreach ($filters as $filter) {
                     if (!is_array($filter) || !isset($filter['property'], $filter['operator'], $filter['value'])) {
                         continue;
@@ -90,8 +90,14 @@ trait Info
                             break;
                     }
                 }
-            }
 
+                $filteredDates[] = $usefulDate;
+            }
+        } else {
+            $filteredDates = $this->usefulDates;
+        }
+
+        foreach ($filteredDates as $usefulDate) {
             $usefulDate->setCurrentDate($copy);
             if ($usefulDate->usefulDate()) {
                 $usefulDates[] = clone $usefulDate;

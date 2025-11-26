@@ -44,7 +44,7 @@ trait Intervals
     public function getNextUsefulDates(int $number = 1, ?array $filters = null): array
     {
         $usefulDates = [];
-        $currentDate = $this->date->copy();
+        $currentDate = $this->date->copy()->addDay();
         while (count($usefulDates) < $number) {
             foreach ($this->getUsefulDate($currentDate, $filters) as $usefulDate) {
                 $usefulDates[] = $usefulDate;
@@ -63,7 +63,7 @@ trait Intervals
     public function getPreviousUsefulDates(int $number = 1, ?array $filters = null): array
     {
         $usefulDates = [];
-        $currentDate = $this->date->copy();
+        $currentDate = $this->date->copy()->subDay();
         while (count($usefulDates) < $number) {
             foreach ($this->getUsefulDate($currentDate, $filters) as $usefulDate) {
                 $usefulDates[] = $usefulDate;

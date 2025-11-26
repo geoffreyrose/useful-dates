@@ -20,6 +20,7 @@ trait Dates
 
         $date = new $date;
         $date->setCurrentDate($this->date);
+        $date->setCurrentUsefulDate($this->date);
         $this->usefulDates[] = $date;
 
         return $this;
@@ -44,6 +45,7 @@ trait Dates
         };
 
         $class->setCurrentDate($this->date);
+        $class->setCurrentUsefulDate($this->date);
         $this->usefulDates[] = $class;
 
         return $this;

@@ -50,6 +50,12 @@ class UsefulDates
             }
         }
 
+        $this->date->shiftTimezone('UTC');
+
+        foreach ($this->usefulDates as $usefulDate) {
+            $usefulDate->setCurrentUsefulDate($this->date);
+        }
+
         return $this;
     }
 

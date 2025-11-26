@@ -40,6 +40,8 @@ abstract class UsefulDateAbstract implements UsefulDateInterface
 
     protected Carbon $currentDate;
 
+    protected Carbon $currentUsefulDate;
+
     public function setCurrentDate(Carbon $currentDate): self
     {
         $this->currentDate = $currentDate;
@@ -47,9 +49,23 @@ abstract class UsefulDateAbstract implements UsefulDateInterface
         return $this;
     }
 
+    public function setCurrentUsefulDate(Carbon $currentDate): self
+    {
+        $this->currentUsefulDate = $currentDate;
+
+        return $this;
+    }
+
     public function daysAway(): int
     {
-        return (int) ceil(Carbon::now()->diffInDays($this->usefulDate()));
+        $ceil = ceil($this->currentUsefulDate->diffInDays($this->usefulDate()));
+        if ($ceil > 0) {
+            return $ceil;
+        } elseif ($ceil <= -1) {
+            return $ceil;
+        } else {
+            return 0;
+        }
     }
 
     public function usefulDate(): ?Carbon
@@ -64,7 +80,6 @@ abstract class UsefulDateAbstract implements UsefulDateInterface
         }
 
         $isBirthday = $date->isBirthday($this->currentDate);
-
         if (!$isBirthday) {
             return null;
         }

@@ -50,6 +50,8 @@ $usefulDates = UsefulDates::setDate(\Carbon\Carbon::now());
 
 ## Add a Useful Date
 
+**Important**: UsefulDates `date()` should always use UTC time.
+
 1. Create a new class that extends [`\UsefulDates\Abstracts\UsefulDateAbstract`](https://github.com/geoffreyrose/useful-dates/blob/main/src/UsefulDates/Abstracts/UsefulDateAbstract.php)
 
 An example for April Fools' Day:
@@ -92,7 +94,7 @@ $usefulDates = $usefulDates->getNextUsefulDates(5);
 ```
 
 Methods on `UsefulDaresAbstract`
-* daysAway() // a positive or negative integer from the current date set
+* daysAway() // a positive or negative float from the current date set
 
 **Alternatively**: Use the `addDate` to add a date without creating a class.
 
