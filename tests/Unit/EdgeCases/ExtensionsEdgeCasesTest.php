@@ -301,14 +301,14 @@ it('handles extension providing multiple useful dates', function (): void {
 });
 
 it('handles empty extension', function (): void {
-    class EmptyExtension extends UsefulDatesExtensionAbstract
+    class EmptyExtensionEdge extends UsefulDatesExtensionAbstract
     {
         public static string $name = 'Empty';
     }
 
     $ud = new UsefulDates;
     $ud->setDate(Carbon::create('2025-01-01'));
-    $ud->addExtension(EmptyExtension::class);
+    $ud->addExtension(EmptyExtensionEdge::class);
 
     // Should not throw, just does nothing
     expect(true)->toBeTrue();

@@ -47,7 +47,7 @@ trait Dates
      * @param  int  $startYear  The first calendar year in which the date is considered (default 1).
      * @return self Fluent interface.
      */
-    public function addDate(string $name, Carbon $date, bool $isRepeated = true, RepeatFrequency $repeatFrequency = RepeatFrequency::YEARLY, int $startYear = 1): self
+    public function addDate(string $name, Carbon $date, bool $isRepeated = true, RepeatFrequency $repeatFrequency = RepeatFrequency::YEARLY, ?int $startYear = null): self
     {
         $class = new class($name, $date, $isRepeated, $repeatFrequency, $startYear) extends \UsefulDates\Abstracts\UsefulDateAbstract
         {
@@ -60,8 +60,9 @@ trait Dates
              * @param  RepeatFrequency  $repeatFrequency  NONE|MONTHLY|YEARLY|CUSTOM.
              * @param  int  $startYear  The first calendar year in which the date is considered.
              */
-            public function __construct(string $name, Carbon $date, bool $isRepeated, RepeatFrequency $repeatFrequency, int $startYear)
+            public function __construct(string $name, Carbon $date, bool $isRepeated, RepeatFrequency $repeatFrequency, ?int $startYear)
             {
+                $startYear = $startYear ?? $date->year;
                 $this->name = $name;
                 $this->is_repeated = $isRepeated;
                 if ($this->is_repeated === false) {

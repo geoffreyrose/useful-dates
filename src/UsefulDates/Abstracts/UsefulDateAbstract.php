@@ -112,7 +112,7 @@ abstract class UsefulDateAbstract implements UsefulDateInterface
         }
 
         return match ($this->repeat_frequency) {
-            RepeatFrequency::NONE => $date->year === $this->start_date->year ? $date : null,
+            RepeatFrequency::NONE => $this->currentDate->year === $date->year && $date->year === $this->start_date->year ? $date : null,
             RepeatFrequency::MONTHLY => $this->isWithinMonthlyRange() ? $date : null,
             RepeatFrequency::YEARLY => $this->isWithinYearlyRange() ? $date : null,
         };

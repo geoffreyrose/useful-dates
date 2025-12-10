@@ -4,7 +4,6 @@ use UsefulDates\Abstracts\UsefulDatesExtensionAbstract;
 use UsefulDates\UsefulDates;
 
 it('uses default usefulDates implementation returning empty array', function (): void {
-    // This covers line 29 in UsefulDatesExtensionAbstract.php
     // Create an extension that doesn't override usefulDates()
     $extensionClass = new class(new UsefulDates) extends UsefulDatesExtensionAbstract
     {
@@ -21,7 +20,6 @@ it('uses default usefulDates implementation returning empty array', function ():
 });
 
 it('uses default methods implementation returning empty array', function (): void {
-    // This covers line 41 in UsefulDatesExtensionAbstract.php
     // Create an extension that doesn't override methods()
     $extension = new class(new UsefulDates) extends UsefulDatesExtensionAbstract
     {

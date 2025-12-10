@@ -30,7 +30,7 @@ class UsefulDates
 
     public function __construct()
     {
-        //
+        $this->setDate(Carbon::now());
     }
 
     /**
@@ -51,7 +51,7 @@ class UsefulDates
         }
 
         if ($date instanceof Carbon) {
-            $this->date = $date;
+            $this->date = $date->copy();
         } elseif ($date instanceof DateTime) {
             $this->date = Carbon::create($date);
         } else {

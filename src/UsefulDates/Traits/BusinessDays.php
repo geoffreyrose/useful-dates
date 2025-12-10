@@ -36,7 +36,7 @@ trait BusinessDays
     public function setBusinessDays(array $days): self
     {
         foreach ($days as $day) {
-            if (!in_array($day, [0, 1, 2, 3, 4, 5, 6])) {
+            if (is_null($day) || !in_array($day, [0, 1, 2, 3, 4, 5, 6])) {
                 throw new InvalidDayException($day);
             }
         }

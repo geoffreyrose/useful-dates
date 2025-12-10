@@ -285,8 +285,7 @@ it('handles getUsefulDatesByYear with filters', function (): void {
     expect($list[0]->important)->toBeTrue();
 });
 
-it('sorts equal dates correctly in getUsefulDatesInDays (line 81)', function (): void {
-    // This covers line 81 in Intervals.php - the `return 0;` when dates are equal
+it('sorts equal dates correctly in getUsefulDatesInDays', function (): void {
     class SameDayEvent1 extends \UsefulDates\Abstracts\UsefulDateAbstract
     {
         public function __construct()

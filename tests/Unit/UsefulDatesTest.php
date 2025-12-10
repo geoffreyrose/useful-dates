@@ -4,8 +4,6 @@ use Carbon\Carbon;
 use UsefulDates\UsefulDates;
 
 it('handles getTopParentClass with non-existent class gracefully', function (): void {
-    // This tests the error handling path in getTopParentClass (lines 88-89)
-    // by using reflection to test the private method with an invalid class name
     $ud = new UsefulDates;
     $ud->setDate(Carbon::create('2025-01-01'));
 
@@ -17,7 +15,6 @@ it('handles getTopParentClass with non-existent class gracefully', function (): 
     // Test with a non-existent class name that could cause get_parent_class to throw
     $result = $method->invoke($ud, 'NonExistentClass\\DoesNotExist');
 
-    // Should return null when error occurs (catch block on line 88-89)
     expect($result)->toBeNull();
 });
 

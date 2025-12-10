@@ -79,7 +79,7 @@ it('handles addDate with leap day', function (): void {
     $ud = new UsefulDates;
     $ud->setDate(Carbon::create('2024-02-29')); // Leap year
 
-    $ud->addDate('Leap Day', Carbon::create('2024-02-29'), startYear: 8);
+    $ud->addDate('Leap Day', Carbon::create('2024-02-29'));
 
     expect($ud->isUsefulDate())->toBeTrue();
 

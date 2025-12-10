@@ -73,7 +73,7 @@ it('filters out dates when one filter fails', function (): void {
 });
 
 it('handles filter with non-existent property', function (): void {
-    class NoPropertyDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class NoPropertyDateEdge extends \UsefulDates\Abstracts\UsefulDateAbstract
     {
         public function __construct()
         {
@@ -91,7 +91,7 @@ it('handles filter with non-existent property', function (): void {
 
     $ud = new UsefulDates;
     $ud->setDate(Carbon::create('2025-05-25'));
-    $ud->add(NoPropertyDate::class);
+    $ud->add(NoPropertyDateEdge::class);
 
     // Filter references a property that doesn't exist
     $dates = $ud->getUsefulDate(null, [

@@ -165,7 +165,6 @@ it('handles additional_search_names property', function (): void {
 });
 
 it('handles daysAway returning 0 when ceil is between -1 and 0', function (): void {
-    // This covers line 87 in UsefulDateAbstract.php
     class SameDayDate extends \UsefulDates\Abstracts\UsefulDateAbstract
     {
         public function __construct()
@@ -188,12 +187,10 @@ it('handles daysAway returning 0 when ceil is between -1 and 0', function (): vo
     $ud->add(SameDayDate::class);
 
     $dates = $ud->getUsefulDate();
-    // The daysAway should be 0 or very close (line 87 returns 0 when ceil is between -1 and 0)
     expect($dates[0]->daysAway())->toBeLessThanOrEqual(1);
 });
 
 it('handles usefulDate returning null when date() returns null', function (): void {
-    // This covers line 102 in UsefulDateAbstract.php
     class NullDateReturner extends \UsefulDates\Abstracts\UsefulDateAbstract
     {
         public function __construct()
@@ -219,7 +216,6 @@ it('handles usefulDate returning null when date() returns null', function (): vo
 });
 
 it('handles CUSTOM repeat frequency returning date directly', function (): void {
-    // This covers line 106 in UsefulDateAbstract.php
     class CustomFrequencyDate extends \UsefulDates\Abstracts\UsefulDateAbstract
     {
         public function __construct()
@@ -247,7 +243,6 @@ it('handles CUSTOM repeat frequency returning date directly', function (): void 
 });
 
 it('handles monthly range check without start_date', function (): void {
-    // This covers line 131 in UsefulDateAbstract.php
     class MonthlyNoStartDate extends \UsefulDates\Abstracts\UsefulDateAbstract
     {
         public function __construct()
@@ -273,7 +268,6 @@ it('handles monthly range check without start_date', function (): void {
 });
 
 it('handles yearly range check without start_date', function (): void {
-    // This covers line 163 in UsefulDateAbstract.php
     class YearlyNoStartDate extends \UsefulDates\Abstracts\UsefulDateAbstract
     {
         public function __construct()
