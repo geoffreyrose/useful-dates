@@ -64,8 +64,14 @@ trait Dates
             {
                 $this->name = $name;
                 $this->is_repeated = $isRepeated;
-                $this->repeat_frequency = $repeatFrequency;
-                $this->start_date = Carbon::createFromFormat('Y-m-d H:i:s', "{$startYear}-{$date->month}-{$date->day} 00:00:00");
+                if ($this->is_repeated === false) {
+                    $this->repeat_frequency = RepeatFrequency::NONE;
+                    $this->start_date = Carbon::createFromFormat('Y-m-d H:i:s', "{$date->year}-{$date->month}-{$date->day} 00:00:00");
+                } else {
+                    $this->repeat_frequency = $repeatFrequency;
+                    $this->start_date = Carbon::createFromFormat('Y-m-d H:i:s', "{$startYear}-{$date->month}-{$date->day} 00:00:00");
+                }
+
             }
 
             /**
@@ -75,7 +81,12 @@ trait Dates
              */
             public function date(): Carbon
             {
-                return Carbon::createFromFormat('Y-m-d H:i:s', "{$this->currentDate->year}-{$this->start_date->month}-{$this->start_date->day} 00:00:00");
+                if ($this->repeat_frequency === RepeatFrequency::MONTHLY) {
+                    return Carbon::createFromFormat('Y-m-d H:i:s', "{$this->currentDate->year}-{$this->currentDate->month}-{$this->start_date->day} 00:00:00");
+                } else {
+                    return Carbon::createFromFormat('Y-m-d H:i:s', "{$this->currentDate->year}-{$this->start_date->month}-{$this->start_date->day} 00:00:00");
+                }
+
             }
         };
 

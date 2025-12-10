@@ -17,6 +17,10 @@ trait Intervals
      */
     public function getUsefulDatesInDays(int $days, ?Carbon $startDate = null, ?array $filters = null): array
     {
+        if (count($this->usefulDates) === 0) {
+            return [];
+        }
+
         $start = $startDate?->copy() ?: $this->date->copy();
         $end = $start->copy()->addDays($days);
 
@@ -96,7 +100,11 @@ trait Intervals
      */
     public function getUsefulDatesInYears(int $years, ?array $filters = null): array
     {
-        $days = (int) ceil($this->date->diffInDays($this->date->copy()->addYears($years)));
+        $days = (int) ceil($this->date->diffInDays($this->date->copy()->addYears($years)) - 1);
+
+        if ($days === -1) {
+            $days = 0;
+        }
 
         return $this->getUsefulDatesInDays($days, filters: $filters);
     }
@@ -110,6 +118,10 @@ trait Intervals
      */
     public function getNextUsefulDates(int $number = 1, ?array $filters = null): array
     {
+        if (count($this->usefulDates) === 0) {
+            return [];
+        }
+
         $usefulDates = [];
         $currentDate = $this->date->copy()->addDay();
         while (count($usefulDates) < $number) {
@@ -131,6 +143,10 @@ trait Intervals
      */
     public function getPreviousUsefulDates(int $number = 1, ?array $filters = null): array
     {
+        if (count($this->usefulDates) === 0) {
+            return [];
+        }
+
         $usefulDates = [];
         $currentDate = $this->date->copy()->subDay();
         while (count($usefulDates) < $number) {

@@ -50,3 +50,23 @@ it('gets previous business day correctly skipping weekends', function (): void {
     expect($prev)->toEqual(Carbon::create('2025-04-04')) // Friday
         ->and($prev->dayOfWeek)->toEqual(5);
 });
+
+it('returns today if it is a business day, otherwise returns previous business day', function (): void {
+    // Test with a business day (Monday)
+    $this->usefulDate->setDate(Carbon::create('2025-04-07')); // Monday
+    expect($this->usefulDate->todayOrPreviousBusinessDay())->toEqual(Carbon::create('2025-04-07'));
+
+    // Test with a weekend day (Saturday)
+    $this->usefulDate->setDate(Carbon::create('2025-04-05')); // Saturday
+    expect($this->usefulDate->todayOrPreviousBusinessDay())->toEqual(Carbon::create('2025-04-04')); // Friday
+});
+
+it('returns today if it is a business day, otherwise returns next business day', function (): void {
+    // Test with a business day (Monday)
+    $this->usefulDate->setDate(Carbon::create('2025-04-07')); // Monday
+    expect($this->usefulDate->todayOrNextBusinessDay())->toEqual(Carbon::create('2025-04-07'));
+
+    // Test with a weekend day (Saturday)
+    $this->usefulDate->setDate(Carbon::create('2025-04-05')); // Saturday
+    expect($this->usefulDate->todayOrNextBusinessDay())->toEqual(Carbon::create('2025-04-07')); // Monday
+});

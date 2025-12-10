@@ -64,7 +64,7 @@ trait BusinessDays
      * @param  Carbon|null  $date  Optional date to check. Defaults to current context date.
      * @return bool True if the date falls on a configured business day; false otherwise.
      */
-    public function isBusinessDay($date = null): bool
+    public function isBusinessDay(?Carbon $date = null): bool
     {
         if (!$date) {
             $date = $this->date;
@@ -76,10 +76,14 @@ trait BusinessDays
     /**
      * Get the next business day after the current context date.
      *
-     * @return Carbon The next date that falls on a configured business day.
+     * @return Carbon|null The next date that falls on a configured business day.
      */
-    public function nextBusinessDay(): Carbon
+    public function nextBusinessDay(): ?Carbon
     {
+        if ($this->businessDays === []) {
+            return null;
+        }
+
         $day = $this->date->copy();
         $next = null;
         while (!$next) {
@@ -94,10 +98,14 @@ trait BusinessDays
     /**
      * Get the previous business day before the current context date.
      *
-     * @return Carbon The previous date that falls on a configured business day.
+     * @return Carbon|null The previous date that falls on a configured business day.
      */
-    public function prevBusinessDay(): Carbon
+    public function prevBusinessDay(): ?Carbon
     {
+        if ($this->businessDays === []) {
+            return null;
+        }
+
         $day = $this->date->copy();
         $prev = null;
         while (!$prev) {

@@ -46,6 +46,10 @@ class UsefulDates
      */
     public function setDate(Carbon|DateTime|string $date): self
     {
+        if (!$date) {
+            throw new InvalidDateException($date);
+        }
+
         if ($date instanceof Carbon) {
             $this->date = $date;
         } elseif ($date instanceof DateTime) {
