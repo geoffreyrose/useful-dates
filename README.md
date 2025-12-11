@@ -43,7 +43,7 @@ $usefulDates = new UsefulDates();
 $usefulDates->setDate(Carbon::now());
 
 // Add a simple date
-$usefulDates->addDate("My Birthday", Carbon::createFromFormat('Y-m-d', '1265-03-07'));
+$usefulDates->addDate(name: "Patrick Star's Birthday", date: Carbon::createFromFormat('Y-m-d', '1999-08-17'));
 
 // Get upcoming dates
 $dates = $usefulDates->getUsefulDatesInDays(30);
