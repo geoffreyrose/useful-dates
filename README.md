@@ -470,7 +470,7 @@ use UsefulDatesUsHolidays\UsefulDatesUsHolidaysExtension;
 use Carbon\Carbon;
 
 /**
- * @mixin UsHolidaysExtension
+ * @mixin UsefulDatesUsHolidaysExtension
  */
 class MyUsefulDates extends UsefulDates
 {
