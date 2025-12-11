@@ -460,6 +460,8 @@ if ($usefulDates->isDecember()) {
 
 For better IDE autocompletion with extension methods, create a wrapper class:
 
+Note: The `@mixin` annotation is what helps IDEs understand the extension methods.
+
 ```php
 <?php
 
