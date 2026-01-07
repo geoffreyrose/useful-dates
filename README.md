@@ -6,7 +6,7 @@
 
 </div>
 
-# Useful Dates
+# Useful Dates: A PHP Holiday Date Package
 
 A simple and elegant PHP library for working with commonly used or desired dates in your applications. UsefulDates helps you quickly identify and retrieve important dates like holidays, birthdays, paydays, and other significant calendar events.
 
