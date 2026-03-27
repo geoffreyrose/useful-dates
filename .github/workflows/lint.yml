@@ -4,6 +4,7 @@ on:
   push: # Runs on push events
     branches:
       - main
+  workflow_dispatch:
 jobs:
   lint:
     runs-on: ubuntu-latest
