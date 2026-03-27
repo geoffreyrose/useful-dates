@@ -3,9 +3,10 @@
 namespace Tests;
 
 use Carbon\Carbon;
+use UsefulDates\Abstracts\UsefulDateAbstract;
 use UsefulDates\Enums\RepeatFrequency;
 
-class ValidAprilFools extends \UsefulDates\Abstracts\UsefulDateAbstract
+class ValidAprilFools extends UsefulDateAbstract
 {
     public function __construct()
     {

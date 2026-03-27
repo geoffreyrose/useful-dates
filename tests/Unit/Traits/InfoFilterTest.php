@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use UsefulDates\Abstracts\UsefulDateAbstract;
 use UsefulDates\Enums\RepeatFrequency;
 use UsefulDates\UsefulDates;
 
@@ -9,7 +10,7 @@ beforeEach(function (): void {
 });
 
 it('filters with greater than operator', function (): void {
-    class FilterGtDate1 extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class FilterGtDate1 extends UsefulDateAbstract
     {
         public int $priority = 3;
 
@@ -28,7 +29,7 @@ it('filters with greater than operator', function (): void {
         }
     }
 
-    class FilterGtDate2 extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class FilterGtDate2 extends UsefulDateAbstract
     {
         public int $priority = 8;
 
@@ -58,7 +59,7 @@ it('filters with greater than operator', function (): void {
 });
 
 it('filters with less than operator', function (): void {
-    class FilterLtDate1 extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class FilterLtDate1 extends UsefulDateAbstract
     {
         public int $level = 2;
 
@@ -77,7 +78,7 @@ it('filters with less than operator', function (): void {
         }
     }
 
-    class FilterLtDate2 extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class FilterLtDate2 extends UsefulDateAbstract
     {
         public int $level = 9;
 
@@ -107,7 +108,7 @@ it('filters with less than operator', function (): void {
 });
 
 it('filters with greater than or equal operator', function (): void {
-    class FilterGteDate1 extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class FilterGteDate1 extends UsefulDateAbstract
     {
         public int $score = 5;
 
@@ -126,7 +127,7 @@ it('filters with greater than or equal operator', function (): void {
         }
     }
 
-    class FilterGteDate2 extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class FilterGteDate2 extends UsefulDateAbstract
     {
         public int $score = 3;
 
@@ -156,7 +157,7 @@ it('filters with greater than or equal operator', function (): void {
 });
 
 it('filters with less than or equal operator', function (): void {
-    class FilterLteDate1 extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class FilterLteDate1 extends UsefulDateAbstract
     {
         public int $rank = 4;
 
@@ -175,7 +176,7 @@ it('filters with less than or equal operator', function (): void {
         }
     }
 
-    class FilterLteDate2 extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class FilterLteDate2 extends UsefulDateAbstract
     {
         public int $rank = 7;
 
@@ -205,7 +206,7 @@ it('filters with less than or equal operator', function (): void {
 });
 
 it('filters with equals operator', function (): void {
-    class FilterEqDate1 extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class FilterEqDate1 extends UsefulDateAbstract
     {
         public string $category = 'A';
 
@@ -224,7 +225,7 @@ it('filters with equals operator', function (): void {
         }
     }
 
-    class FilterEqDate2 extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class FilterEqDate2 extends UsefulDateAbstract
     {
         public string $category = 'B';
 
@@ -254,7 +255,7 @@ it('filters with equals operator', function (): void {
 });
 
 it('filters with not equals operator', function (): void {
-    class FilterNeDate1 extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class FilterNeDate1 extends UsefulDateAbstract
     {
         public string $type = 'special';
 
@@ -273,7 +274,7 @@ it('filters with not equals operator', function (): void {
         }
     }
 
-    class FilterNeDate2 extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class FilterNeDate2 extends UsefulDateAbstract
     {
         public string $type = 'normal';
 
@@ -303,7 +304,7 @@ it('filters with not equals operator', function (): void {
 });
 
 it('handles invalid filter format gracefully', function (): void {
-    class InvalidFilterDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class InvalidFilterDate extends UsefulDateAbstract
     {
         public int $value = 5;
 
@@ -335,7 +336,7 @@ it('handles invalid filter format gracefully', function (): void {
 });
 
 it('handles non-existent property gracefully', function (): void {
-    class NoPropertyDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class NoPropertyDate extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -360,7 +361,7 @@ it('handles non-existent property gracefully', function (): void {
 });
 
 it('handles default operator case', function (): void {
-    class DefaultOperatorDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class DefaultOperatorDate extends UsefulDateAbstract
     {
         public int $val = 10;
 

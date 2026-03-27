@@ -1,11 +1,12 @@
 <?php
 
 use Carbon\Carbon;
+use UsefulDates\Abstracts\UsefulDateAbstract;
 use UsefulDates\Enums\RepeatFrequency;
 use UsefulDates\UsefulDates;
 
 it('handles RepeatFrequency NONE with is_repeated false', function (): void {
-    class NoneNotRepeated extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class NoneNotRepeated extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -33,7 +34,7 @@ it('handles RepeatFrequency NONE with is_repeated false', function (): void {
 });
 
 it('handles RepeatFrequency NONE with is_repeated true', function (): void {
-    class NoneRepeated extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class NoneRepeated extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -61,7 +62,7 @@ it('handles RepeatFrequency NONE with is_repeated true', function (): void {
 });
 
 it('handles RepeatFrequency MONTHLY across multiple years', function (): void {
-    class MonthlyMultiYear extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class MonthlyMultiYear extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -90,7 +91,7 @@ it('handles RepeatFrequency MONTHLY across multiple years', function (): void {
 });
 
 it('handles RepeatFrequency YEARLY with specific start and end years', function (): void {
-    class YearlyRanged extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class YearlyRanged extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -130,7 +131,7 @@ it('handles RepeatFrequency YEARLY with specific start and end years', function 
 });
 
 it('handles RepeatFrequency CUSTOM with complex logic', function (): void {
-    class CustomComplexLogic extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class CustomComplexLogic extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -165,7 +166,7 @@ it('handles RepeatFrequency CUSTOM with complex logic', function (): void {
 });
 
 it('handles RepeatFrequency CUSTOM with null returns', function (): void {
-    class CustomNullReturns extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class CustomNullReturns extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -198,7 +199,7 @@ it('handles RepeatFrequency enum comparison', function (): void {
 });
 
 it('handles RepeatFrequency MONTHLY with end_date in same year', function (): void {
-    class MonthlyShortRange extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class MonthlyShortRange extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -233,7 +234,7 @@ it('handles RepeatFrequency MONTHLY with end_date in same year', function (): vo
 });
 
 it('handles RepeatFrequency MONTHLY spanning year boundary', function (): void {
-    class MonthlyYearSpan extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class MonthlyYearSpan extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -280,7 +281,7 @@ it('handles RepeatFrequency MONTHLY spanning year boundary', function (): void {
 });
 
 it('handles RepeatFrequency with date() returning different months/days', function (): void {
-    class VariableDateReturn extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class VariableDateReturn extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -331,7 +332,7 @@ it('handles all RepeatFrequency enum values', function (): void {
 });
 
 it('handles RepeatFrequency default value', function (): void {
-    class DefaultFrequency extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class DefaultFrequency extends UsefulDateAbstract
     {
         public function __construct()
         {

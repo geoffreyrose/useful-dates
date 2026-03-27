@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use UsefulDates\Abstracts\UsefulDateAbstract;
 use UsefulDates\Enums\RepeatFrequency;
 use UsefulDates\UsefulDates;
 
@@ -111,7 +112,7 @@ it('handles setDate returns self for chaining', function (): void {
 });
 
 it('handles add returns self for chaining', function (): void {
-    class ChainTestDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class ChainTestDate extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -154,7 +155,7 @@ it('handles setBusinessDays returns self for chaining', function (): void {
 });
 
 it('handles adding same date class multiple times creates separate instances', function (): void {
-    class MultiInstanceDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class MultiInstanceDate extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -188,7 +189,7 @@ it('handles date context preserved after exception', function (): void {
 
     try {
         $ud->setDate('invalid');
-    } catch (\Exception $e) {
+    } catch (Exception $e) {
         // Date should still be Jan 1
         expect($ud->date->format('Y-m-d'))->toEqual('2025-01-01');
     }
@@ -201,7 +202,7 @@ it('handles business days preserved after exception', function (): void {
 
     try {
         $ud->setBusinessDays([99]);
-    } catch (\Exception $e) {
+    } catch (Exception $e) {
         // Business days should still be [1,2,3]
         expect($ud->getBusinessDays())->toEqual([1, 2, 3]);
     }
@@ -216,7 +217,7 @@ it('handles useful dates list preserved after exception', function (): void {
 
     try {
         $ud->add('InvalidClass');
-    } catch (\Exception $e) {
+    } catch (Exception $e) {
         // Should still have the same dates
         expect(count($ud->getUsefulDate()))->toEqual($countBefore);
     }
@@ -235,7 +236,7 @@ it('handles date reference not shared between calls', function (): void {
 });
 
 it('handles property access via property hooks', function (): void {
-    class PropertyHooksDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class PropertyHooksDate extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -264,7 +265,7 @@ it('handles property access via property hooks', function (): void {
 });
 
 it('handles setting properties via hooks', function (): void {
-    class SettablePropsDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class SettablePropsDate extends UsefulDateAbstract
     {
         public function __construct()
         {

@@ -1,6 +1,9 @@
 <?php
 
 use Carbon\Carbon;
+use UsefulDates\Abstracts\UsefulDateAbstract;
+use UsefulDates\Enums\RepeatFrequency;
+use UsefulDates\Exceptions\InvalidDateException;
 use UsefulDates\UsefulDates;
 
 beforeEach(function (): void {
@@ -27,16 +30,16 @@ it('sets date with string', function (): void {
 
 it('throws on invalid date', function (): void {
     $this->usefulDate->setDate('invalid-date');
-})->throws(\UsefulDates\Exceptions\InvalidDateException::class);
+})->throws(InvalidDateException::class);
 
 it('updates currentUsefulDate on existing dates when setting date', function (): void {
-    class TrackDateUpdate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class TrackDateUpdate extends UsefulDateAbstract
     {
         public function __construct()
         {
             $this->name = 'Track Date';
             $this->is_repeated = true;
-            $this->repeat_frequency = \UsefulDates\Enums\RepeatFrequency::YEARLY;
+            $this->repeat_frequency = RepeatFrequency::YEARLY;
             $this->start_date = Carbon::create(2020, 1, 1, 0, 0, 0);
         }
 

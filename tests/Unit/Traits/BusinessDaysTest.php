@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use UsefulDates\Exceptions\InvalidDayException;
 use UsefulDates\UsefulDates;
 
 beforeEach(function (): void {
@@ -22,7 +23,7 @@ it('can set and get custom business days', function (): void {
 
 it('throws on invalid business day values', function (): void {
     $this->usefulDate->setBusinessDays([1, 2, 7]);
-})->throws(\UsefulDates\Exceptions\InvalidDayException::class);
+})->throws(InvalidDayException::class);
 
 it('determines if a date is a business day (paramless uses internal date)', function (): void {
     // 2025-03-31 is Monday (1)

@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use UsefulDates\Abstracts\UsefulDateAbstract;
 use UsefulDates\Enums\RepeatFrequency;
 use UsefulDates\UsefulDates;
 
@@ -9,7 +10,7 @@ beforeEach(function (): void {
 });
 
 it('handles null date from date() method in getUsefulDatesInDays', function (): void {
-    class NullDateEvent extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class NullDateEvent extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -35,7 +36,7 @@ it('handles null date from date() method in getUsefulDatesInDays', function (): 
 });
 
 it('handles MONTHLY frequency in getUsefulDatesInDays with null occurrence', function (): void {
-    class MonthlyNullEvent extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class MonthlyNullEvent extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -67,7 +68,7 @@ it('handles MONTHLY frequency in getUsefulDatesInDays with null occurrence', fun
 });
 
 it('handles CUSTOM frequency in getUsefulDatesInDays', function (): void {
-    class CustomFreqEvent extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class CustomFreqEvent extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -103,7 +104,7 @@ it('handles CUSTOM frequency in getUsefulDatesInDays', function (): void {
 });
 
 it('tests getUsefulDatesInDays with custom start date', function (): void {
-    class CustomStartDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class CustomStartDate extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -132,7 +133,7 @@ it('tests getUsefulDatesInDays with custom start date', function (): void {
 });
 
 it('handles year boundary in getUsefulDatesInDays', function (): void {
-    class YearBoundaryDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class YearBoundaryDate extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -159,7 +160,7 @@ it('handles year boundary in getUsefulDatesInDays', function (): void {
 });
 
 it('handles monthly date with addMonthNoOverflow', function (): void {
-    class MonthlyNoOverflow extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class MonthlyNoOverflow extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -190,7 +191,7 @@ it('handles monthly date with addMonthNoOverflow', function (): void {
 });
 
 it('sorts dates correctly by usefulDate', function (): void {
-    class SortDate1 extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class SortDate1 extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -206,7 +207,7 @@ it('sorts dates correctly by usefulDate', function (): void {
         }
     }
 
-    class SortDate2 extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class SortDate2 extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -236,7 +237,7 @@ it('sorts dates correctly by usefulDate', function (): void {
 });
 
 it('handles getUsefulDatesByYear with filters', function (): void {
-    class YearFilterDate1 extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class YearFilterDate1 extends UsefulDateAbstract
     {
         public bool $important = true;
 
@@ -255,7 +256,7 @@ it('handles getUsefulDatesByYear with filters', function (): void {
         }
     }
 
-    class YearFilterDate2 extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class YearFilterDate2 extends UsefulDateAbstract
     {
         public bool $important = false;
 
@@ -286,7 +287,7 @@ it('handles getUsefulDatesByYear with filters', function (): void {
 });
 
 it('sorts equal dates correctly in getUsefulDatesInDays', function (): void {
-    class SameDayEvent1 extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class SameDayEvent1 extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -302,7 +303,7 @@ it('sorts equal dates correctly in getUsefulDatesInDays', function (): void {
         }
     }
 
-    class SameDayEvent2 extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class SameDayEvent2 extends UsefulDateAbstract
     {
         public function __construct()
         {

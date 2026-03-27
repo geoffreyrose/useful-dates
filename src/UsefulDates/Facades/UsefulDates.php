@@ -2,7 +2,9 @@
 
 namespace UsefulDates\Facades;
 
-class UsefulDates extends \Illuminate\Support\Facades\Facade
+use Illuminate\Support\Facades\Facade;
+
+class UsefulDates extends Facade
 {
     protected static function getFacadeAccessor()
     {

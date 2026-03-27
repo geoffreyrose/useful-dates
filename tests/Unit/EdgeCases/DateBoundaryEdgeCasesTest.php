@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use UsefulDates\Abstracts\UsefulDateAbstract;
 use UsefulDates\Enums\RepeatFrequency;
 use UsefulDates\UsefulDates;
 
@@ -168,7 +169,7 @@ it('handles week boundaries with business days', function (): void {
 });
 
 it('handles same date in different years with YEARLY frequency', function (): void {
-    class YearlyBoundaryDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class YearlyBoundaryDate extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -210,7 +211,7 @@ it('handles quarter boundaries', function (string $date): void {
 ]);
 
 it('handles dates with start_date equal to end_date', function (): void {
-    class SingleDayRange extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class SingleDayRange extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -235,7 +236,7 @@ it('handles dates with start_date equal to end_date', function (): void {
 });
 
 it('handles monthly date on 31st for months with fewer days', function (): void {
-    class Day31Monthly extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class Day31Monthly extends UsefulDateAbstract
     {
         public function __construct()
         {
