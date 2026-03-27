@@ -1,11 +1,12 @@
 <?php
 
 use Carbon\Carbon;
+use UsefulDates\Abstracts\UsefulDateAbstract;
 use UsefulDates\Enums\RepeatFrequency;
 use UsefulDates\UsefulDates;
 
 it('handles multiple filters with AND logic', function (): void {
-    class MultiFilterDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class MultiFilterDate extends UsefulDateAbstract
     {
         public int $priority = 5;
 
@@ -39,7 +40,7 @@ it('handles multiple filters with AND logic', function (): void {
 });
 
 it('filters out dates when one filter fails', function (): void {
-    class FilterFailDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class FilterFailDate extends UsefulDateAbstract
     {
         public int $priority = 3;
 
@@ -73,7 +74,7 @@ it('filters out dates when one filter fails', function (): void {
 });
 
 it('handles filter with non-existent property', function (): void {
-    class NoPropertyDateEdge extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class NoPropertyDateEdge extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -124,7 +125,7 @@ it('handles null filters returns all dates', function (): void {
 });
 
 it('handles filter with string comparison', function (): void {
-    class StringPropertyDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class StringPropertyDate extends UsefulDateAbstract
     {
         public string $category = 'holiday';
 
@@ -161,7 +162,7 @@ it('handles filter with string comparison', function (): void {
 });
 
 it('handles filter with numeric boundaries', function (): void {
-    class NumericBoundaryDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class NumericBoundaryDate extends UsefulDateAbstract
     {
         public float $importance = 7.5;
 
@@ -220,7 +221,7 @@ it('handles filter with numeric boundaries', function (): void {
 });
 
 it('handles filter with boolean values', function (): void {
-    class BooleanFilterDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class BooleanFilterDate extends UsefulDateAbstract
     {
         public bool $enabled = true;
 
@@ -263,7 +264,7 @@ it('handles filter with boolean values', function (): void {
 });
 
 it('handles filter with unknown operator falls through', function (): void {
-    class UnknownOperatorDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class UnknownOperatorDate extends UsefulDateAbstract
     {
         public int $value = 10;
 
@@ -296,7 +297,7 @@ it('handles filter with unknown operator falls through', function (): void {
 });
 
 it('handles filter comparing zero values', function (): void {
-    class ZeroValueDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class ZeroValueDate extends UsefulDateAbstract
     {
         public int $count = 0;
 
@@ -336,7 +337,7 @@ it('handles filter comparing zero values', function (): void {
 });
 
 it('handles filter comparing negative numbers', function (): void {
-    class NegativeValueDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class NegativeValueDate extends UsefulDateAbstract
     {
         public int $offset = -5;
 

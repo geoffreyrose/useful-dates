@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use UsefulDates\Abstracts\UsefulDateAbstract;
 use UsefulDates\Enums\RepeatFrequency;
 use UsefulDates\UsefulDates;
 
@@ -62,7 +63,7 @@ it('handles repeated calls to getUsefulDate', function (): void {
 });
 
 it('handles many filters applied', function (): void {
-    class MultiPropDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class MultiPropDate extends UsefulDateAbstract
     {
         public int $prop1 = 1;
 

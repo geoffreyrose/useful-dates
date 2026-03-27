@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use UsefulDates\Abstracts\UsefulDateAbstract;
 use UsefulDates\Enums\RepeatFrequency;
 use UsefulDates\UsefulDates;
 
@@ -9,7 +10,7 @@ beforeEach(function (): void {
 });
 
 it('respects monthly repeat frequency with start and end dates', function (): void {
-    class MonthlyDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class MonthlyDate extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -42,7 +43,7 @@ it('respects monthly repeat frequency with start and end dates', function (): vo
 });
 
 it('respects yearly repeat frequency with start and end dates', function (): void {
-    class YearlyLimitedDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class YearlyLimitedDate extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -79,7 +80,7 @@ it('respects yearly repeat frequency with start and end dates', function (): voi
 });
 
 it('calculates days away correctly', function (): void {
-    class TestDateForDaysAway extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class TestDateForDaysAway extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -107,7 +108,7 @@ it('calculates days away correctly', function (): void {
 });
 
 it('calculates negative days away for past dates', function (): void {
-    class PastDaysAwayDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class PastDaysAwayDate extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -139,7 +140,7 @@ it('calculates negative days away for past dates', function (): void {
 });
 
 it('handles additional_search_names property', function (): void {
-    class AdditionalNamesDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class AdditionalNamesDate extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -165,7 +166,7 @@ it('handles additional_search_names property', function (): void {
 });
 
 it('handles daysAway returning 0 when ceil is between -1 and 0', function (): void {
-    class SameDayDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class SameDayDate extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -191,7 +192,7 @@ it('handles daysAway returning 0 when ceil is between -1 and 0', function (): vo
 });
 
 it('handles usefulDate returning null when date() returns null', function (): void {
-    class NullDateReturner extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class NullDateReturner extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -216,7 +217,7 @@ it('handles usefulDate returning null when date() returns null', function (): vo
 });
 
 it('handles CUSTOM repeat frequency returning date directly', function (): void {
-    class CustomFrequencyDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class CustomFrequencyDate extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -243,7 +244,7 @@ it('handles CUSTOM repeat frequency returning date directly', function (): void 
 });
 
 it('handles monthly range check without start_date', function (): void {
-    class MonthlyNoStartDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class MonthlyNoStartDate extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -268,7 +269,7 @@ it('handles monthly range check without start_date', function (): void {
 });
 
 it('handles yearly range check without start_date', function (): void {
-    class YearlyNoStartDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class YearlyNoStartDate extends UsefulDateAbstract
     {
         public function __construct()
         {

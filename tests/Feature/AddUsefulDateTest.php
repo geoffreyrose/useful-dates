@@ -3,6 +3,7 @@
 use Carbon\Carbon;
 use Tests\InvalidAprilFools;
 use Tests\ValidAprilFools;
+use UsefulDates\Exceptions\InvalidUsefulDateException;
 use UsefulDates\UsefulDates;
 
 beforeEach(function (): void {
@@ -23,4 +24,4 @@ it('add valid AprilFools useful date', function (): void {
 it('add invalid AprilFools useful date', function (): void {
     $this->usefulDate->setDate(Carbon::create('2025-01-01'));
     $this->usefulDate->add(InvalidAprilFools::class);
-})->throws(\UsefulDates\Exceptions\InvalidUsefulDateException::class);
+})->throws(InvalidUsefulDateException::class);

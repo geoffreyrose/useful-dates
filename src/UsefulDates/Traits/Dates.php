@@ -49,7 +49,7 @@ trait Dates
      */
     public function addDate(string $name, Carbon $date, bool $isRepeated = true, RepeatFrequency $repeatFrequency = RepeatFrequency::YEARLY, ?int $startYear = null): self
     {
-        $class = new class($name, $date, $isRepeated, $repeatFrequency, $startYear) extends \UsefulDates\Abstracts\UsefulDateAbstract
+        $class = new class($name, $date, $isRepeated, $repeatFrequency, $startYear) extends UsefulDateAbstract
         {
             /**
              * Construct a simple repeating useful-date definition.

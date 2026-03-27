@@ -77,7 +77,7 @@ it('InvalidUsefulDateException is thrown with correct type', function (): void {
         expect(false)->toBeTrue(); // Should not reach here
     } catch (InvalidUsefulDateException $e) {
         expect($e)->toBeInstanceOf(InvalidUsefulDateException::class);
-        expect($e)->toBeInstanceOf(\RuntimeException::class);
+        expect($e)->toBeInstanceOf(RuntimeException::class);
     }
 });
 
@@ -90,15 +90,15 @@ it('InvalidExtensionException is thrown with correct type', function (): void {
         expect(false)->toBeTrue(); // Should not reach here
     } catch (InvalidExtensionException $e) {
         expect($e)->toBeInstanceOf(InvalidExtensionException::class);
-        expect($e)->toBeInstanceOf(\RuntimeException::class);
+        expect($e)->toBeInstanceOf(RuntimeException::class);
     }
 });
 
 it('exceptions inherit from RuntimeException', function (): void {
-    expect(new InvalidDateException('test'))->toBeInstanceOf(\RuntimeException::class);
-    expect(new InvalidDayException(10))->toBeInstanceOf(\RuntimeException::class);
-    expect(new InvalidUsefulDateException)->toBeInstanceOf(\RuntimeException::class);
-    expect(new InvalidExtensionException)->toBeInstanceOf(\RuntimeException::class);
+    expect(new InvalidDateException('test'))->toBeInstanceOf(RuntimeException::class);
+    expect(new InvalidDayException(10))->toBeInstanceOf(RuntimeException::class);
+    expect(new InvalidUsefulDateException)->toBeInstanceOf(RuntimeException::class);
+    expect(new InvalidExtensionException)->toBeInstanceOf(RuntimeException::class);
 });
 
 it('InvalidDayException handles negative number in message', function (): void {

@@ -3,6 +3,8 @@
 use Carbon\Carbon;
 use Tests\ValidAprilFools;
 use UsefulDates\Abstracts\UsefulDatesExtensionAbstract;
+use UsefulDates\Exceptions\InvalidExtensionException;
+use UsefulDates\Exceptions\InvalidUsefulDateException;
 use UsefulDates\UsefulDates;
 
 beforeEach(function (): void {
@@ -14,7 +16,7 @@ it('throws when adding an invalid extension', function (): void {
     class BadExtension {}
 
     $this->usefulDate->addExtension(BadExtension::class);
-})->throws(\UsefulDates\Exceptions\InvalidExtensionException::class);
+})->throws(InvalidExtensionException::class);
 
 it('throws when extension returns invalid useful date classes', function (): void {
     class NotAUsefulDate {}
@@ -28,7 +30,7 @@ it('throws when extension returns invalid useful date classes', function (): voi
     }
 
     $this->usefulDate->addExtension(BadUsefulDateExtension::class);
-})->throws(\UsefulDates\Exceptions\InvalidUsefulDateException::class);
+})->throws(InvalidUsefulDateException::class);
 
 it('adds custom methods from a valid extension and invokes them dynamically', function (): void {
     class MethodOnlyExtension extends UsefulDatesExtensionAbstract

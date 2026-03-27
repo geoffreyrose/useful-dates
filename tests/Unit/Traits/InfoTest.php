@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use Tests\ValidAprilFools;
+use UsefulDates\Abstracts\UsefulDateAbstract;
 use UsefulDates\Enums\RepeatFrequency;
 use UsefulDates\UsefulDates;
 
@@ -30,7 +31,7 @@ it('returns false when the day is not a useful date', function (): void {
 });
 
 it('returns multiple useful dates when more than one matches the day', function (): void {
-    class AlsoAprilFirst extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class AlsoAprilFirst extends UsefulDateAbstract
     {
         public function __construct()
         {

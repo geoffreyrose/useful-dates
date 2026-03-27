@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use UsefulDates\Abstracts\UsefulDateAbstract;
 use UsefulDates\Enums\RepeatFrequency;
 use UsefulDates\UsefulDates;
 
@@ -36,7 +37,7 @@ it('handles getUsefulDatesInDays with very large day count', function (): void {
 });
 
 it('handles getUsefulDatesInDays spanning multiple years with YEARLY frequency', function (): void {
-    class MultiYearDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class MultiYearDate extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -63,7 +64,7 @@ it('handles getUsefulDatesInDays spanning multiple years with YEARLY frequency',
 });
 
 it('handles getUsefulDatesInDays with MONTHLY frequency across year boundary', function (): void {
-    class MonthlyYearBoundary extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class MonthlyYearBoundary extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -89,7 +90,7 @@ it('handles getUsefulDatesInDays with MONTHLY frequency across year boundary', f
 });
 
 it('handles getUsefulDatesInDays with CUSTOM frequency iterating every day', function (): void {
-    class CustomEveryDay extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class CustomEveryDay extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -117,7 +118,7 @@ it('handles getUsefulDatesInDays with CUSTOM frequency iterating every day', fun
 });
 
 it('handles getUsefulDatesInDays with CUSTOM frequency selective days', function (): void {
-    class CustomSelectiveDays extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class CustomSelectiveDays extends UsefulDateAbstract
     {
         public function __construct()
         {
@@ -191,7 +192,7 @@ it('handles getNextUsefulDates with count larger than available dates', function
 });
 //
 it('handles getNextUsefulDates with filters', function (): void {
-    class FilteredNextDateTrue extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class FilteredNextDateTrue extends UsefulDateAbstract
     {
         public bool $important = false;
 
@@ -210,7 +211,7 @@ it('handles getNextUsefulDates with filters', function (): void {
         }
     }
 
-    class FilteredNextDateFalse extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class FilteredNextDateFalse extends UsefulDateAbstract
     {
         public bool $important = false;
 
@@ -267,7 +268,7 @@ it('handles getUsefulDatesByYear with multiple dates in same year', function ():
 });
 //
 it('handles getUsefulDatesByYear with filters', function (): void {
-    class YearlyFilteredA extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class YearlyFilteredA extends UsefulDateAbstract
     {
         public string $category;
 
@@ -286,7 +287,7 @@ it('handles getUsefulDatesByYear with filters', function (): void {
         }
     }
 
-    class YearlyFilteredB extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class YearlyFilteredB extends UsefulDateAbstract
     {
         public string $category;
 
@@ -356,7 +357,7 @@ it('handles empty useful dates list', function (): void {
 });
 
 it('handles date occurrences outside usefulDate range get filtered', function (): void {
-    class RangeRestrictedDate extends \UsefulDates\Abstracts\UsefulDateAbstract
+    class RangeRestrictedDate extends UsefulDateAbstract
     {
         public function __construct()
         {
