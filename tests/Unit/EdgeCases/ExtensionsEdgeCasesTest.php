@@ -23,7 +23,7 @@ it('throws InvalidUsefulDateException when extension provides invalid useful dat
 
         public static bool $hasMethods = false;
 
-        public static function usefulDates(): array
+        public static function usefulDates(mixed $options = null): array
         {
             return [
                 'MyDate',
@@ -45,7 +45,7 @@ it('handles extension with no methods', function (): void {
 
         public static bool $hasMethods = false;
 
-        public static function usefulDates(): array
+        public static function usefulDates(mixed $options = null): array
         {
             return [];
         }
@@ -83,7 +83,7 @@ it('handles extension with custom methods', function (): void {
 
         public static bool $hasMethods = true;
 
-        public static function usefulDates(): array
+        public static function usefulDates(mixed $options = null): array
         {
             return [TestDateForExtension::class];
         }
@@ -281,7 +281,7 @@ it('handles extension providing multiple useful dates', function (): void {
     {
         public static string $name = 'Multi Date';
 
-        public static function usefulDates(): array
+        public static function usefulDates(mixed $options = null): array
         {
             return [Holiday1::class, Holiday2::class];
         }

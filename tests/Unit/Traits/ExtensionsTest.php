@@ -23,7 +23,7 @@ it('throws when extension returns invalid useful date classes', function (): voi
 
     class BadUsefulDateExtension extends UsefulDatesExtensionAbstract
     {
-        public static function usefulDates(): array
+        public static function usefulDates(mixed $options = null): array
         {
             return [NotAUsefulDate::class];
         }
@@ -37,7 +37,7 @@ it('adds custom methods from a valid extension and invokes them dynamically', fu
     {
         public static bool $hasMethods = true;
 
-        public static function usefulDates(): array
+        public static function usefulDates(mixed $options = null): array
         {
             return [];
         }
@@ -64,7 +64,7 @@ it('adds custom methods from a valid extension and invokes them dynamically', fu
 it('throws BadMethodCallException when calling unknown dynamic method', function (): void {
     class EmptyExtension extends UsefulDatesExtensionAbstract
     {
-        public static function usefulDates(): array
+        public static function usefulDates(mixed $options = null): array
         {
             return [];
         }
@@ -79,7 +79,7 @@ it('throws BadMethodCallException when calling unknown dynamic method', function
 it('add date in extension', function (): void {
     class MyExtension extends UsefulDatesExtensionAbstract
     {
-        public static function usefulDates(): array
+        public static function usefulDates(mixed $options = null): array
         {
             return [
                 ValidAprilFools::class,
