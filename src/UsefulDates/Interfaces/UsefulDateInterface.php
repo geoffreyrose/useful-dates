@@ -12,6 +12,7 @@ interface UsefulDateInterface
         get;
     }
 
+    /** @var string[] */
     public array $additional_search_names {
         set;
         get;
@@ -44,6 +45,14 @@ interface UsefulDateInterface
      * @return self Fluent interface.
      */
     public function setCurrentDate(Carbon $currentDate): self;
+
+    /**
+     * Set the date used to compute relative values such as daysAway().
+     *
+     * @param  Carbon  $currentDate  The date context for relative calculations.
+     * @return self Fluent interface.
+     */
+    public function setCurrentUsefulDate(Carbon $currentDate): self;
 
     /**
      * Get the occurrence date for the current context, ignoring repeat filters.

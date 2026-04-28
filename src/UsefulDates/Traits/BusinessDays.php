@@ -3,10 +3,12 @@
 namespace UsefulDates\Traits;
 
 use Carbon\Carbon;
+use UsefulDates\Exceptions\BusinessDaysNotConfiguredException;
 use UsefulDates\Exceptions\InvalidDayException;
 
 trait BusinessDays
 {
+    /** @var int[] */
     public array $businessDays = [1, 2, 3, 4, 5] {
         set => $this->businessDays = $value;
     }
@@ -36,7 +38,7 @@ trait BusinessDays
     public function setBusinessDays(array $days): self
     {
         foreach ($days as $day) {
-            if (is_null($day) || !in_array($day, [0, 1, 2, 3, 4, 5, 6])) {
+            if (!is_int($day) || !in_array($day, [0, 1, 2, 3, 4, 5, 6])) {
                 throw new InvalidDayException($day);
             }
         }
@@ -49,7 +51,7 @@ trait BusinessDays
     /**
      * Get the configured business days.
      *
-     * @return array<int, int> List of days of week considered business days (0=Sun..6=Sat).
+     * @return int[] List of days of week considered business days (0=Sun..6=Sat).
      */
     public function getBusinessDays(): array
     {
@@ -121,19 +123,39 @@ trait BusinessDays
      * Get today if it is a business day; otherwise, return the previous business day.
      *
      * @return Carbon The date that is either today or the most recent business day before today.
+     *
+     * @throws BusinessDaysNotConfiguredException
      */
     public function todayOrPreviousBusinessDay(): Carbon
     {
-        return $this->isBusinessDay($this->date) ? $this->date : $this->prevBusinessDay();
+        if ($this->isBusinessDay($this->date)) {
+            return $this->date;
+        }
+        $result = $this->prevBusinessDay();
+        if ($result === null) {
+            throw new BusinessDaysNotConfiguredException;
+        }
+
+        return $result;
     }
 
     /**
      * Get today if it is a business day; otherwise, return the next business day.
      *
      * @return Carbon The date that is either today or the next business day after today.
+     *
+     * @throws BusinessDaysNotConfiguredException
      */
     public function todayOrNextBusinessDay(): Carbon
     {
-        return $this->isBusinessDay($this->date) ? $this->date : $this->nextBusinessDay();
+        if ($this->isBusinessDay($this->date)) {
+            return $this->date;
+        }
+        $result = $this->nextBusinessDay();
+        if ($result === null) {
+            throw new BusinessDaysNotConfiguredException;
+        }
+
+        return $result;
     }
 }

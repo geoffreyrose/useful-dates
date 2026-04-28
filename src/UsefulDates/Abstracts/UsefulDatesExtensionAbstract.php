@@ -24,7 +24,7 @@ abstract class UsefulDatesExtensionAbstract
      *
      * @return array<int, class-string> Fully-qualified class names of UsefulDate implementations.
      */
-    public static function usefulDates(): array
+    public static function usefulDates(mixed $options = null): array
     {
         return [];
     }

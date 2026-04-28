@@ -15,7 +15,7 @@ trait Extensions
      * The extension class must extend UsefulDatesExtensionAbstract. Any provided
      * useful dates must extend UsefulDateAbstract.
      *
-     * @param  class-string  $extension  Fully-qualified extension class name.
+     * @param  class-string<UsefulDatesExtensionAbstract>  $extension  Fully-qualified extension class name.
      * @param  mixed|null  $options  Optional configuration passed to the extension when building dates.
      * @return self Fluent interface.
      *
@@ -36,6 +36,7 @@ trait Extensions
         }
 
         if ($extension::$hasMethods) {
+            /** @var UsefulDatesExtensionAbstract $ext */
             $ext = new $extension($this);
             foreach ($ext->methods() as $methodName => $callable) {
                 $this->customMethods[$methodName] = $callable;

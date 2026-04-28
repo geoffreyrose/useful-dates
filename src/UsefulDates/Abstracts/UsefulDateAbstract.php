@@ -13,6 +13,7 @@ abstract class UsefulDateAbstract implements UsefulDateInterface
         get => $this->name;
     }
 
+    /** @var string[] */
     public array $additional_search_names = [] {
         set => $this->additional_search_names = $value;
         get => $this->additional_search_names;
@@ -80,9 +81,9 @@ abstract class UsefulDateAbstract implements UsefulDateInterface
     {
         $ceil = ceil($this->currentUsefulDate->diffInDays($this->usefulDate()));
         if ($ceil > 0) {
-            return $ceil;
+            return intval($ceil);
         } elseif ($ceil <= -1) {
-            return $ceil;
+            return intval($ceil);
         } else {
             return 0;
         }
@@ -112,7 +113,7 @@ abstract class UsefulDateAbstract implements UsefulDateInterface
         }
 
         return match ($this->repeat_frequency) {
-            RepeatFrequency::NONE => $this->currentDate->year === $date->year && $date->year === $this->start_date->year ? $date : null,
+            RepeatFrequency::NONE => $this->start_date !== null && $this->currentDate->year === $date->year && $date->year === $this->start_date->year ? $date : null,
             RepeatFrequency::MONTHLY => $this->isWithinMonthlyRange() ? $date : null,
             RepeatFrequency::YEARLY => $this->isWithinYearlyRange() ? $date : null,
         };
