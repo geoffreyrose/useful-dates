@@ -3,6 +3,7 @@
 namespace UsefulDates\Traits;
 
 use Carbon\Carbon;
+use UsefulDates\Interfaces\UsefulDateInterface;
 
 trait Info
 {
@@ -37,7 +38,7 @@ trait Info
      *
      * @param  Carbon|null  $date  Optional date to evaluate against. Defaults to current context date.
      * @param  array<int, array{property:string, operator:string, value:mixed}>|null  $filters  Optional property filters.
-     * @return array<int, object> A list of matching useful-date objects (cloned instances).
+     * @return array<int, UsefulDateInterface> A list of matching useful-date objects (cloned instances).
      */
     public function getUsefulDate(?Carbon $date = null, ?array $filters = null): array
     {
@@ -66,7 +67,7 @@ trait Info
      * operators are: >, <, >=, <=, =, !=
      *
      * @param  array<int, array{property:string, operator:string, value:mixed}>|null  $filters  Optional property filters.
-     * @return array<int, object> The list of useful-date definitions matching the filters (original instances).
+     * @return UsefulDateInterface[] The list of useful-date definitions matching the filters (original instances).
      */
     private function filterUsefulDates(?array $filters): array
     {

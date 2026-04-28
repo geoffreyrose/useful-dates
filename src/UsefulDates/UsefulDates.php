@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use DateTime;
 use Throwable;
 use UsefulDates\Exceptions\InvalidDateException;
+use UsefulDates\Interfaces\UsefulDateInterface;
 use UsefulDates\Traits\BusinessDays;
 use UsefulDates\Traits\Dates;
 use UsefulDates\Traits\Extensions;
@@ -20,8 +21,10 @@ class UsefulDates
     use Info;
     use Intervals;
 
+    /** @var UsefulDateInterface[] */
     private array $usefulDates = [];
 
+    /** @var array<string, callable> */
     private array $customMethods = [];
 
     public Carbon $date {
@@ -53,10 +56,10 @@ class UsefulDates
         if ($date instanceof Carbon) {
             $this->date = $date->copy();
         } elseif ($date instanceof DateTime) {
-            $this->date = Carbon::create($date);
+            $this->date = Carbon::create($date) ?? throw new InvalidDateException($date);
         } else {
             try {
-                $this->date = Carbon::create($date);
+                $this->date = Carbon::create($date) ?? throw new InvalidDateException($date);
             } catch (Throwable) {
                 throw new InvalidDateException($date);
             }

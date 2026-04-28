@@ -5,7 +5,9 @@ namespace UsefulDates\Traits;
 use Carbon\Carbon;
 use UsefulDates\Abstracts\UsefulDateAbstract;
 use UsefulDates\Enums\RepeatFrequency;
+use UsefulDates\Exceptions\InvalidDateFormatException;
 use UsefulDates\Exceptions\InvalidUsefulDateException;
+use UsefulDates\Interfaces\UsefulDateInterface;
 
 trait Dates
 {
@@ -28,6 +30,7 @@ trait Dates
         }
 
         $date = new $date;
+        /** @var UsefulDateInterface $date */
         $date->setCurrentDate($this->date);
         $date->setCurrentUsefulDate($this->date);
         $this->usefulDates[] = $date;
@@ -46,6 +49,8 @@ trait Dates
      * @param  RepeatFrequency  $repeatFrequency  NONE|MONTHLY|YEARLY|CUSTOM (default YEARLY).
      * @param  int  $startYear  The first calendar year in which the date is considered (default 1).
      * @return self Fluent interface.
+     *
+     * @throws InvalidDateFormatException If the start date is invalid.
      */
     public function addDate(string $name, Carbon $date, bool $isRepeated = true, RepeatFrequency $repeatFrequency = RepeatFrequency::YEARLY, ?int $startYear = null): self
     {
@@ -82,12 +87,19 @@ trait Dates
              */
             public function date(): Carbon
             {
+                if ($this->start_date === null) {
+                    throw new \RuntimeException('start_date is required');
+                }
                 if ($this->repeat_frequency === RepeatFrequency::MONTHLY) {
-                    return Carbon::createFromFormat('Y-m-d H:i:s', "{$this->currentDate->year}-{$this->currentDate->month}-{$this->start_date->day} 00:00:00");
+                    $result = Carbon::createFromFormat('Y-m-d H:i:s', "{$this->currentDate->year}-{$this->currentDate->month}-{$this->start_date->day} 00:00:00");
                 } else {
-                    return Carbon::createFromFormat('Y-m-d H:i:s', "{$this->currentDate->year}-{$this->start_date->month}-{$this->start_date->day} 00:00:00");
+                    $result = Carbon::createFromFormat('Y-m-d H:i:s', "{$this->currentDate->year}-{$this->start_date->month}-{$this->start_date->day} 00:00:00");
+                }
+                if ($result === null) {
+                    throw new InvalidDateFormatException;
                 }
 
+                return $result;
             }
         };
 

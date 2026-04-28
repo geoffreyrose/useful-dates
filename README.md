@@ -542,6 +542,11 @@ Multiple filters are combined with AND logic (all conditions must match).
 ./vendor/bin/pint
 ```
 
+### Static Analysis
+```bash
+./vendor/bin/phpstan analyse src --memory-limit 2G
+```
+
 ### Testing
 
 ```bash
