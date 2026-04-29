@@ -10,7 +10,6 @@ it('handles getTopParentClass with non-existent class gracefully', function (): 
     // Use reflection to test the private method with an invalid class name
     $reflection = new ReflectionClass($ud);
     $method = $reflection->getMethod('getTopParentClass');
-    $method->setAccessible(true);
 
     // Test with a non-existent class name that could cause get_parent_class to throw
     $result = $method->invoke($ud, 'NonExistentClass\\DoesNotExist');
@@ -25,7 +24,6 @@ it('handles getTopParentClass with class that has no parent', function (): void 
 
     $reflection = new ReflectionClass($ud);
     $method = $reflection->getMethod('getTopParentClass');
-    $method->setAccessible(true);
 
     // stdClass has no parent
     $result = $method->invoke($ud, 'stdClass');
