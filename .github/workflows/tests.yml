@@ -8,7 +8,15 @@ on: ['push', 'pull_request', 'workflow_dispatch']
 jobs:
   ci:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        include:
+          - php-version: '8.4'
+            coverage: 'true'
+            phpunit-version: '13'
+          - php-version: '8.5'
+            coverage: 'false'
+            phpunit-version: '13'
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -16,7 +24,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.4
+          php-version: ${{ matrix.php-version }}
           tools: composer:v2
           coverage: xdebug
 
@@ -25,3 +33,9 @@ jobs:
 
       - name: Tests
         run: ./vendor/bin/pest --ci
+
+      - name: Codecov
+        if: ${{ matrix.coverage == 'true' }}
+        uses: codecov/codecov-action@v6
+        with:
+          files: ./build/logs/clover.xml
