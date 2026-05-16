@@ -22,5 +22,9 @@
         <include>
             <directory>./src</directory>
         </include>
+        <exclude>
+            <directory suffix=".php">src/UsefulDates/Facades</directory>
+            <file>src/UsefulDates/ServiceProvider.php</file>
+        </exclude>
     </source>
 </phpunit>
