@@ -43,4 +43,4 @@ jobs:
         if: ${{ matrix.coverage == 'true' }}
         uses: codecov/codecov-action@v6
         with:
-          files: ./build/logs/clover.xml
+          files: ./clover.xml
