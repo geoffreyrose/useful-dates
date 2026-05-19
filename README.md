@@ -1,7 +1,8 @@
 <div style="text-align: center;"> 
 
 [![Latest Stable Version](https://img.shields.io/packagist/v/geoffreyrose/useful-dates?style=flat-square)](https://packagist.org/packages/geoffreyrose/useful-dates)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/geoffreyrose/useful-dates/tests.yml?branch=main&style=flat-square)](https://github.com/geoffreyrose/useful-dates/actions?query=branch%3Amain)
+[![Test Status](https://img.shields.io/github/actions/workflow/status/geoffreyrose/useful-dates/tests.yml?branch=main&style=flat-square&label=tests)](https://github.com/geoffreyrose/useful-dates/actions?query=branch%3Amain)
+[![Code Coverage](https://img.shields.io/codecov/c/gh/geoffreyrose/useful-dates/main?style=flat-square)](https://app.codecov.io/gh/geoffreyrose/useful-dates/branch/main)
 [![License](https://img.shields.io/github/license/geoffreyrose/useful-dates?style=flat-square)](https://github.com/geoffreyrose/useful-dates/blob/main/LICENSE)
 
 </div>

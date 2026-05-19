@@ -37,3 +37,14 @@ it('adds a simple date using addDate method', function (): void {
         ->and($dates[0]->name)->toEqual('My Birthday')
         ->and($dates[0]->usefulDate())->toEqual(Carbon::create('2025-06-15'));
 });
+
+it('throws RuntimeException when date() is called with no start_date set', function (): void {
+    $ud = new UsefulDates;
+    $ud->setDate(Carbon::create('2025-06-15'));
+    $ud->addDate('My Birthday', Carbon::create('1990-06-15'));
+
+    $dates = $ud->getUsefulDate();
+    $dates[0]->start_date = null;
+
+    expect(fn () => $dates[0]->date())->toThrow(\RuntimeException::class);
+});

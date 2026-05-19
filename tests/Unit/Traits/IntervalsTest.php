@@ -48,3 +48,13 @@ it('gets the previous N useful dates going backward', function (): void {
     expect(array_map(fn ($d) => $d->usefulDate(), $list))
         ->toEqual([Carbon::create('2025-04-01'), Carbon::create('2024-04-01'), Carbon::create('2023-04-01')]);
 });
+
+it('gets the previous useful dates going backward with no dates added', function (): void {
+    $usefulDate = new UsefulDates;
+    // Set a default date to satisfy add() precondition
+    $usefulDate->setDate(Carbon::create('2025-01-01'));
+
+    $dates = $usefulDate->getPreviousUsefulDates(3);
+
+    expect(count($dates))->toEqual(0);
+});

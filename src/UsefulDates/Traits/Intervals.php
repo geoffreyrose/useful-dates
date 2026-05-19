@@ -4,7 +4,6 @@ namespace UsefulDates\Traits;
 
 use Carbon\Carbon;
 use UsefulDates\Enums\RepeatFrequency;
-use UsefulDates\Exceptions\InvalidDateFormatException;
 
 trait Intervals
 {
@@ -15,8 +14,6 @@ trait Intervals
      * @param  Carbon|null  $startDate  Optional starting date; defaults to the instance context date if null.
      * @param  array<int, array{property:string, operator:string, value:mixed}>|null  $filters  Optional property filters.
      * @return array<int, object> A sorted list of matching useful-date objects (cloned instances).
-     *
-     * @throws InvalidDateFormatException If the start date is invalid.
      */
     public function getUsefulDatesInDays(int $days, ?Carbon $startDate = null, ?array $filters = null): array
     {
@@ -41,10 +38,9 @@ trait Intervals
                 // +1 for years to pick up dates that might fall on the last day of the year but cannot be calculated until the next year
                 // such as NewYearsDayObserved, which is on 2021-12-31, but cannot really calculate that date unless you look at New Years for 2022
                 for ($year = $startYear; $year <= $endYear + 1; $year++) {
+                    /** @var Carbon $yearStart */
                     $yearStart = Carbon::createFromFormat('Y-m-d H:i:s', "{$year}-01-01 00:00:00");
-                    if ($yearStart === null) {
-                        throw new InvalidDateFormatException;
-                    }
+
                     $filteredDate->setCurrentDate($yearStart);
                     $occurrenceDate = $filteredDate->date();
                     if (!$occurrenceDate) {
@@ -59,10 +55,8 @@ trait Intervals
                     }
                 }
             } elseif ($frequency === RepeatFrequency::MONTHLY) {
+                /** @var Carbon $cursorDate */
                 $cursorDate = Carbon::createFromFormat('Y-m-d H:i:s', "{$start->year}-{$start->month}-01 00:00:00");
-                if ($cursorDate === null) {
-                    throw new InvalidDateFormatException;
-                }
                 while ($cursorDate->lte($end)) {
                     $filteredDate->setCurrentDate($cursorDate);
                     $occurrenceDate = $filteredDate->date();
@@ -184,10 +178,8 @@ trait Intervals
             $year = $this->date->year;
         }
 
+        /** @var Carbon $startOfYear */
         $startOfYear = Carbon::createFromFormat('Y-m-d', "{$year}-01-01");
-        if ($startOfYear === null) {
-            throw new InvalidDateFormatException;
-        }
 
         return $this->getUsefulDatesInDays($startOfYear->daysInYear() - 1, startDate: $startOfYear, filters: $filters);
     }

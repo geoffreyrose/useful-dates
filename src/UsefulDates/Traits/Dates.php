@@ -5,9 +5,7 @@ namespace UsefulDates\Traits;
 use Carbon\Carbon;
 use UsefulDates\Abstracts\UsefulDateAbstract;
 use UsefulDates\Enums\RepeatFrequency;
-use UsefulDates\Exceptions\InvalidDateFormatException;
 use UsefulDates\Exceptions\InvalidUsefulDateException;
-use UsefulDates\Interfaces\UsefulDateInterface;
 
 trait Dates
 {
@@ -25,12 +23,11 @@ trait Dates
      */
     public function add(string $date): self
     {
-        if ($this->getTopParentClass($date) !== UsefulDateAbstract::class) {
+        if (!is_subclass_of($date, UsefulDateAbstract::class)) {
             throw new InvalidUsefulDateException;
         }
 
         $date = new $date;
-        /** @var UsefulDateInterface $date */
         $date->setCurrentDate($this->date);
         $date->setCurrentUsefulDate($this->date);
         $this->usefulDates[] = $date;
@@ -47,10 +44,8 @@ trait Dates
      * @param  Carbon  $date  Prototype date whose month/day are used for each occurrence.
      * @param  bool  $isRepeated  Whether the date repeats beyond its start year (default true).
      * @param  RepeatFrequency  $repeatFrequency  NONE|MONTHLY|YEARLY|CUSTOM (default YEARLY).
-     * @param  int  $startYear  The first calendar year in which the date is considered (default 1).
+     * @param  int|null  $startYear  The first calendar year in which the date is considered (default 1).
      * @return self Fluent interface.
-     *
-     * @throws InvalidDateFormatException If the start date is invalid.
      */
     public function addDate(string $name, Carbon $date, bool $isRepeated = true, RepeatFrequency $repeatFrequency = RepeatFrequency::YEARLY, ?int $startYear = null): self
     {
@@ -63,7 +58,7 @@ trait Dates
              * @param  Carbon  $date  Prototype date whose month/day are used for each occurrence.
              * @param  bool  $isRepeated  Whether the date repeats beyond its start year.
              * @param  RepeatFrequency  $repeatFrequency  NONE|MONTHLY|YEARLY|CUSTOM.
-             * @param  int  $startYear  The first calendar year in which the date is considered.
+             * @param  int|null  $startYear  The first calendar year in which the date is considered.
              */
             public function __construct(string $name, Carbon $date, bool $isRepeated, RepeatFrequency $repeatFrequency, ?int $startYear)
             {
@@ -91,12 +86,9 @@ trait Dates
                     throw new \RuntimeException('start_date is required');
                 }
                 if ($this->repeat_frequency === RepeatFrequency::MONTHLY) {
-                    $result = Carbon::createFromFormat('Y-m-d H:i:s', "{$this->currentDate->year}-{$this->currentDate->month}-{$this->start_date->day} 00:00:00");
+                    $result = Carbon::createFromFormat('Y-m-d H:i:s', "{$this->currentDate->year}-{$this->currentDate->month}-{$this->start_date->day} 00:00:00") ?: throw new \RuntimeException('Invalid Date');
                 } else {
-                    $result = Carbon::createFromFormat('Y-m-d H:i:s', "{$this->currentDate->year}-{$this->start_date->month}-{$this->start_date->day} 00:00:00");
-                }
-                if ($result === null) {
-                    throw new InvalidDateFormatException;
+                    $result = Carbon::createFromFormat('Y-m-d H:i:s', "{$this->currentDate->year}-{$this->start_date->month}-{$this->start_date->day} 00:00:00") ?: throw new \RuntimeException('Invalid Date');
                 }
 
                 return $result;
