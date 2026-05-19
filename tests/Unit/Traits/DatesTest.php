@@ -46,5 +46,5 @@ it('throws RuntimeException when date() is called with no start_date set', funct
     $dates = $ud->getUsefulDate();
     $dates[0]->start_date = null;
 
-    expect(fn () => $dates[0]->date())->toThrow(\RuntimeException::class);
+    expect(fn () => $dates[0]->date())->toThrow(RuntimeException::class);
 });

@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use UsefulDates\Exceptions\BusinessDaysNotConfiguredException;
 use UsefulDates\Exceptions\InvalidDayException;
 use UsefulDates\UsefulDates;
 
@@ -75,9 +76,9 @@ it('returns today if it is a business day, otherwise returns next business day',
 it('no business day values get next', function (): void {
     $this->usefulDate->setBusinessDays([]);
     $this->usefulDate->todayOrNextBusinessDay();
-})->throws(\UsefulDates\Exceptions\BusinessDaysNotConfiguredException::class);
+})->throws(BusinessDaysNotConfiguredException::class);
 
 it('no business day values get prev', function (): void {
     $this->usefulDate->setBusinessDays([]);
     $this->usefulDate->todayOrPreviousBusinessDay();
-})->throws(\UsefulDates\Exceptions\BusinessDaysNotConfiguredException::class);
+})->throws(BusinessDaysNotConfiguredException::class);
