@@ -73,27 +73,4 @@ class UsefulDates
 
         return $this;
     }
-
-    /**
-     * Get the top-most parent class name for the given class name.
-     *
-     * @param  string  $className  Fully-qualified class name to inspect.
-     * @return string|null The top-most parent class name, or null if none or on error.
-     */
-    private function getTopParentClass(string $className): ?string
-    {
-        try {
-            $currentClass = $className;
-            $topParent = null;
-
-            while ($parent = get_parent_class($currentClass)) {
-                $topParent = $parent;
-                $currentClass = $parent;
-            }
-
-            return $topParent;
-        } catch (Throwable) {
-            return null;
-        }
-    }
 }

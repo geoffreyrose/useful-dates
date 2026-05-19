@@ -23,12 +23,12 @@ trait Extensions
      */
     public function addExtension(string $extension, mixed $options = null): self
     {
-        if ($this->getTopParentClass($extension) !== UsefulDatesExtensionAbstract::class) {
+        if (!is_subclass_of($extension, UsefulDatesExtensionAbstract::class)) {
             throw new InvalidExtensionException;
         }
 
         foreach ($extension::usefulDates($options) as $dateToAdd) {
-            if ($this->getTopParentClass($dateToAdd) !== UsefulDateAbstract::class) {
+            if (!is_subclass_of($dateToAdd, UsefulDateAbstract::class)) {
                 throw new InvalidUsefulDateException;
             }
 
